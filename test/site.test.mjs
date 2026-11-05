@@ -28,7 +28,8 @@ test('email alerts are only a disabled placeholder', () => {
 test('the check page stays light: no third-party scripts and small assets', () => {
   const html = read('index.html');
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
-  const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs'];
+  const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs',
+    'js/prefs.mjs', 'js/view.mjs'];
   const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0);
   assert.ok(bytes < 100_000, `${bytes} bytes`);
 });
@@ -38,4 +39,65 @@ test('station suggestions are plain buttons with a live result count', () => {
   assert.doesNotMatch(html, /role="listbox"/);
   assert.match(html, /id="station-count"[^>]*aria-live="polite"/);
   assert.doesNotMatch(read('js/app.mjs'), /role', 'option'/);
+});
+
+test('the display font is self-hosted and small', () => {
+  const font = new URL('../site/fonts/bricolage-latin.woff2', import.meta.url);
+  const size = statSync(font).size;
+  assert.ok(size > 0 && size < 40_000, `${size} bytes`);
+  assert.equal(readFileSync(font).subarray(0, 4).toString('latin1'), 'wOF2');
+  const css = read('style.css');
+  assert.match(css, /@font-face\s*\{[^}]*url\(fonts\/bricolage-latin\.woff2\)[^}]*font-display:\s*swap/);
+});
+
+test('no page or stylesheet loads fonts, styles or scripts from another origin', () => {
+  for (const page of PAGES) {
+    const html = read(page);
+    assert.doesNotMatch(html, /<script[^>]+src="(https?:)?\/\//, page);
+    assert.doesNotMatch(html, /<link[^>]+href="(https?:)?\/\//, page);
+    assert.doesNotMatch(html, /fonts\.(googleapis|gstatic)\.com/, page);
+    assert.doesNotMatch(html, /<style/, page);
+  }
+  const css = read('style.css');
+  assert.doesNotMatch(css, /@import/);
+  assert.doesNotMatch(css, /url\(\s*["']?(https?:)?\/\//);
+});
+
+test('every animation is switched off for reduced motion', () => {
+  const css = read('style.css');
+  assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)\s*\{[^}]*animation:\s*none\s*!important;\s*transition:\s*none\s*!important/);
+  const outside = css.replace(/@media \(prefers-reduced-motion:\s*no-preference\)\{(?:[^{}]*\{[^}]*\})*\s*\}/, '');
+  assert.doesNotMatch(outside.replace(/@keyframes[^{]*\{(?:[^{}]*\{[^}]*\})*\s*\}/g, ''), /[{;]\s*animation:\s*(?!none)/);
+});
+
+test('privacy page explains that choices stay in localStorage on the device', () => {
+  const html = read('privacy/index.html');
+  assert.match(html, /localStorage/);
+  assert.match(html, /mai inviate/);
+  assert.match(html, /cancellando i dati del sito/);
+});
+
+test('pass picker: Mensile and Annuale buttons, the rest under "altro"', () => {
+  const html = read('index.html');
+  assert.match(html, /<input type="radio" name="pass-kind" value="mensile" checked>/);
+  assert.match(html, /<input type="radio" name="pass-kind" value="annuale">/);
+  assert.match(html, /<details class="more"[^>]*>\s*<summary>[^<]*altro/);
+  assert.match(html, /<label for="pass">/);
+  for (const id of ['station', 'line', 'pass', 'price']) assert.match(html, new RegExp(`<label for="${id}">`), id);
+});
+
+test('the current page is marked in the navigation and the CTA keeps the official form URL', () => {
+  const current = { 'index.html': '"">Verifica', 'come-richiedere/index.html': 'come-richiedere/" aria-current', 'regole/index.html': 'regole/" aria-current', 'privacy/index.html': 'privacy/" aria-current' };
+  for (const [page, needle] of Object.entries(current)) {
+    const html = read(page);
+    assert.equal((html.match(/aria-current="page"/g) ?? []).length, 1, page);
+    if (page !== 'index.html') assert.ok(html.includes(needle), page);
+  }
+  assert.match(read('index.html'), /<a href="" aria-current="page">Verifica<\/a>/);
+  assert.match(read('js/app.mjs'), /https:\/\/www\.trenord\.it\/store\/#\/it\/auth\/login/);
+  assert.match(read('js/app.mjs'), /modulo ufficiale Trenord/);
+});
+
+test('result rendering writes text, never HTML', () => {
+  for (const f of ['js/app.mjs', 'js/prefs.mjs', 'js/view.mjs']) assert.doesNotMatch(read(f), /innerHTML|outerHTML|insertAdjacentHTML/, f);
 });
