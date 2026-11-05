@@ -18,7 +18,8 @@
   <label for="station">Stazione</label>
   <input id="station" type="search" placeholder="Es. Morbegno" aria-describedby="station-hint" aria-controls="station-results">
   <p id="station-hint" class="hint">Scrivi la stazione da cui parti o scegli direttamente la linea qui sotto.</p>
-  <ul id="station-results" class="suggestions" role="listbox" hidden></ul>
+  <ul id="station-results" class="suggestions" hidden></ul>
+  <p id="station-count" class="visually-hidden" aria-live="polite"></p>
   <label for="line">Direttrice</label>
   <select id="line" required><option value="">Scegli la direttrice</option></select>
   <label for="pass">Tipo di abbonamento</label>

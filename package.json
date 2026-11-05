@@ -8,7 +8,8 @@
   "scripts": {
     "test": "node --test \"test/*.test.mjs\"",
     "build": "node scripts/build.mjs",
-    "update": "node scripts/update.mjs"
+    "update": "node scripts/update.mjs",
+    "check:data": "node scripts/check-data.mjs"
   },
   "license": "MIT"
 }

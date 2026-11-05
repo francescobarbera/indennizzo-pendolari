@@ -29,7 +29,13 @@ test('the check page stays light: no third-party scripts and small assets', () =
   const html = read('index.html');
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
   const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs'];
-  const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0)
-    + statSync(new URL('../data/indennizzi.json', import.meta.url)).size;
-  assert.ok(bytes < 300_000, `${bytes} bytes`);
+  const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0);
+  assert.ok(bytes < 100_000, `${bytes} bytes`);
+});
+
+test('station suggestions are plain buttons with a live result count', () => {
+  const html = read('index.html');
+  assert.doesNotMatch(html, /role="listbox"/);
+  assert.match(html, /id="station-count"[^>]*aria-live="polite"/);
+  assert.doesNotMatch(read('js/app.mjs'), /role', 'option'/);
 });

@@ -27,7 +27,8 @@ test('excluded and integrated passes are flagged, missing price asks for it', ()
 test('deadlines: monthly 12 months after the month, annual conservative from publication, stated wins', () => {
   assert.equal(addMonths('2025-11', 2), '2026-01');
   assert.equal(claimDeadline('2026-03', 'mensile', null), '2027-03');
-  assert.equal(claimDeadline('2026-03', 'annuale', null), '2027-04');
+  assert.equal(claimDeadline('2026-03', 'annuale', null), '2027-05');
+  assert.equal(claimDeadline('2025-10', 'annuale', null), '2026-12');
   assert.equal(claimDeadline('2024-07', 'mensile', '2026-10'), '2026-10');
   assert.equal(isExpired('2026-10', new Date('2026-11-05')), true);
   assert.equal(isExpired('2026-11', new Date('2026-11-05')), false);

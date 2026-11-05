@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { promisify } from 'node:util';
 import { collectMonths, mergeData } from '../lib/update.mjs';
+import { assertValidData } from '../lib/validate.mjs';
 
 const run = promisify(execFile);
 const DATA = new URL('../data/indennizzi.json', import.meta.url);
@@ -29,6 +30,7 @@ async function main() {
     });
     const previous = JSON.parse(await readFile(DATA, 'utf8').catch(() => 'null'));
     const { changed, data } = mergeData(previous, months, new Date());
+    assertValidData(data);
     if (!changed) return console.log(`Nessuna novità (${data.months.length} mesi).`);
     const tmp = new URL('../data/indennizzi.json.tmp', import.meta.url);
     await writeFile(tmp, `${JSON.stringify(data, null, 2)}\n`);

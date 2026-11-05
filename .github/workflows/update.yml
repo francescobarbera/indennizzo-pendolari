@@ -5,11 +5,7 @@ on:
     - cron: '0 6 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-  issues: write
-  pages: write
-  id-token: write
+permissions: {}
 
 concurrency:
   group: update-data
@@ -18,18 +14,25 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - run: npm test
       - run: npm run update
+      - run: npm run check:data
       - run: npm test
       - id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet -- data/; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -39,24 +42,40 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/indennizzi.json
           git commit -m "data: aggiorna indennizzi"
-          git push
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
-      - name: Segnala il fallimento con una issue
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          gh label create aggiornamento-fallito --color B60205 --description "Aggiornamento automatico dei dati fallito" 2>/dev/null || true
-          open=$(gh issue list --label aggiornamento-fallito --state open --json number --jq '.[0].number // empty')
-          if [ -n "$open" ]; then
-            gh issue comment "$open" --body "Fallito di nuovo: $run_url"
-          else
-            gh issue create --title "Aggiornamento dati fallito" --label aggiornamento-fallito \
-              --body "L'aggiornamento giornaliero non è riuscito e i dati pubblicati non sono stati toccati. Log: $run_url"
-          fi
 
   deploy:
     needs: update
     if: needs.update.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     uses: ./.github/workflows/pages.yml
+
+  notify:
+    needs: [update, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Segnala il fallimento con una issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FAILED: ${{ needs.update.result == 'failure' && 'aggiornamento' || 'pubblicazione' }}
+        run: |
+          gh label create aggiornamento-fallito --color B60205 --description "Aggiornamento automatico dei dati fallito" 2>/dev/null || true
+          open=$(gh issue list --label aggiornamento-fallito --state open --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body "Fallito di nuovo ($FAILED): $RUN_URL"
+          elif [ "$FAILED" = aggiornamento ]; then
+            gh issue create --title "Aggiornamento dati fallito" --label aggiornamento-fallito \
+              --body "L'aggiornamento giornaliero non è riuscito e i dati pubblicati non sono stati toccati. Log: $RUN_URL"
+          else
+            gh issue create --title "Pubblicazione dati fallita" --label aggiornamento-fallito \
+              --body "I dati nuovi sono su main ma il sito non è stato ripubblicato. Rilancia il workflow Pages. Log: $RUN_URL"
+          fi

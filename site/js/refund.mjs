@@ -29,7 +29,7 @@ export function estimateRefund(passType, price) {
 
 export function claimDeadline(month, passType, statedDeadline) {
   if (statedDeadline) return statedDeadline;
-  return addMonths(month, passType === 'mensile' || passType === 'trenocitta' ? 12 : 13);
+  return addMonths(month, passType === 'mensile' || passType === 'trenocitta' ? 12 : 14);
 }
 
 export function isExpired(deadline, today) {

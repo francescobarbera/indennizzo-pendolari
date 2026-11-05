@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { buildReport, monthLabel } from '../site/js/report.mjs';
 
-const data = JSON.parse(readFileSync(new URL('../data/indennizzi.json', import.meta.url), 'utf8'));
+const data = JSON.parse(readFileSync(new URL('./fixtures/indennizzi-2026-11.json', import.meta.url), 'utf8'));
 const today = new Date('2026-11-05T10:00:00Z');
 
 test('Morbegno monthly pass: last 12 months, 8 qualifying, 6 still claimable at 18,30 € each', () => {

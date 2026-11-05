@@ -30,7 +30,6 @@ function showSuggestions() {
       const item = el('li');
       const button = el('button', `${s.name} → Dir. ${code} ${line.name}`);
       button.type = 'button';
-      button.setAttribute('role', 'option');
       button.addEventListener('click', () => {
         $('line').value = code;
         $('station').value = s.name;
@@ -41,6 +40,10 @@ function showSuggestions() {
       list.append(item);
     }
   }
+  const count = list.children.length;
+  $('station-count').textContent = $('station').value.trim()
+    ? (count ? `${count} ${count === 1 ? 'risultato' : 'risultati'}` : 'Nessuna stazione trovata')
+    : '';
 }
 
 function summary(report) {

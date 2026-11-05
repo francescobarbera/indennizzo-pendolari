@@ -6,14 +6,17 @@ import { collectMonths, extractPdfLinks, mergeData, SOURCE_PAGE } from '../lib/u
 const fixture = (f) => readFileSync(new URL(`./fixtures/${f}`, import.meta.url), 'utf8');
 const PAGE = `<a href="/fileadmin/x/INDENNIZZI/2026/TABELLA_B_MARZO_26.pdf">m</a>
 <a href="/fileadmin/x/INDENNIZZI/2025/251218_IndennizzoOttobre.pdf">o</a>
-<a href="/fileadmin/x/Reclami/Modulo.pdf">form</a>`;
+<a href="/fileadmin/x/Reclami/Modulo.pdf">form</a>
+<a href="https://evil.example/INDENNIZZI/x.pdf">evil</a>
+<a href="http://www.trenord.it/INDENNIZZI/plain.pdf">plain</a>
+<a href="data:application/pdf,/INDENNIZZI/x.pdf">data</a>`;
 const TEXTS = { 'TABELLA_B_MARZO_26.pdf': 'TABELLA_B_MARZO_26.txt', '251218_IndennizzoOttobre.pdf': '251218_IndennizzoOttobre.txt' };
 const deps = (texts = TEXTS) => ({
   fetchText: async (url) => { assert.equal(url, SOURCE_PAGE); return PAGE; },
   pdfToText: async (url) => fixture(texts[url.split('/').pop()]),
 });
 
-test('extracts only indennizzo PDFs with irregular names as absolute URLs', () => {
+test('extracts only https www.trenord.it indennizzo PDFs with irregular names as absolute URLs', () => {
   assert.deepEqual(extractPdfLinks(PAGE), [
     'https://www.trenord.it/fileadmin/x/INDENNIZZI/2025/251218_IndennizzoOttobre.pdf',
     'https://www.trenord.it/fileadmin/x/INDENNIZZI/2026/TABELLA_B_MARZO_26.pdf',
