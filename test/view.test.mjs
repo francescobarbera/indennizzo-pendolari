@@ -35,6 +35,7 @@ test('month tiles: states, bars and labels', () => {
   assert.equal(barWidth(-1), 0);
   assert.deepEqual(monthParts('2026-08'), { abbr: 'ago', year: '2026' });
   assert.equal(percent(12.61), '12,61%');
+  assert.equal(percent(12.61, 1), '12,6%');
   assert.equal(worstMonth([{ index: 7.5, qualifies: false }, { index: 12, qualifies: true }, { index: null, qualifies: false }]).index, 7.5);
   assert.equal(worstMonth([{ index: null, qualifies: false }]), null);
   assert.deepEqual(Object.keys(PASS_SHORT).sort(), Object.keys(PASS_TYPES).sort());

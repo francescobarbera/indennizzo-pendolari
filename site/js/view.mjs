@@ -12,8 +12,8 @@ export function monthParts(month) {
   return { abbr: MONTH_ABBR[m - 1], year: String(y) };
 }
 
-export function percent(index) {
-  return `${index.toLocaleString('it-IT', { maximumFractionDigits: 2 })}%`;
+export function percent(index, digits = 2) {
+  return `${index.toLocaleString('it-IT', { maximumFractionDigits: digits })}%`;
 }
 
 // Bars run from 0 to 20%, so the 10% threshold sits in the middle.
