@@ -1,0 +1,94 @@
+                                                DETTAGLIO DEL SERVIZIO - LUGLIO 2026
+È possibile richiedere l'indennizzo dell'abbonamento mensile o annuale (Delibera 106/2018 ART) se il valore "Indice" supera il
+10%.
+Dettagli alla pagina: https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/
+A luglio ha inciso significativamente sul riconoscimento dell'indennizzo lo sciopero indetto nei giorni 23-24 del mese, che ha
+causato la soppressione totale e la limitazione di percorso di oltre 1400 corse complessive.
+
+Escludendo l'impatto dello sciopero, avrebbero maturato diritto all’indennizzo tre direttrici: Lecco-Como, Brescia-Piadena-Parma
+per ripetute irregolarità infrastrutturali; Brescia-Iseo-Edolo per irregolarità infrastrutturali e le ripercussioni di condizioni
+meteorologiche eccezionali.
+
+                                                                                                             Indice   Indennizzo
+   Cod Dir                                         Direttrice
+       01         Novara-Milano-Treviglio                                                                     3,99         No
+
+       02         Saronno-Seregno-Milano-Albairate                                                            6,37         No
+
+       03         Domodossola-Gallarate-Milano                                                                8,23         No
+
+       04         P.to Ceresio-Varese-Gallarate-Milano                                                        8,52         No
+
+       05         Luino-Gallarate-Milano                                                                     11,00         SI
+
+       06         Chiasso-Como-Monza-Milano                                                                   7,52         No
+
+       07         Tirano-Sondrio-Lecco-Milano                                                                11,47         SI
+
+       08         Lecco-Molteno-Monza-Milano                                                                  8,88         No
+
+       09         Chiavenna-Colico                                                                            4,58         No
+
+       10         Lecco-Molteno-Como                                                                         13,52         SI
+
+       11         Lecco-Bergamo-Brescia                                                                       4,84         No
+
+       12         Bergamo-Carnate-Milano                                                                      7,60         No
+
+       14         Bergamo-Treviglio                                                                           6,31         No
+
+       15         Bergamo-Pioltello-Milano                                                                    6,42         No
+
+       16         Cremona-Treviglio                                                                           8,05         No
+
+       17         Verona-Brescia-Treviglio-Milano                                                             7,25         No
+
+       18         Brescia-Piadena-Parma                                                                      13,71         SI
+
+       19         Brescia-Cremona                                                                             4,53         No
+
+       20         Mantova-Cremona-Lodi-Milano                                                                 9,90         No
+
+       21         Piacenza-Lodi-Milano                                                                        7,62         No
+
+       22         Alessandria-Pavia-Milano                                                                    7,94         No
+
+       23         Stradella-Pavia-Milano                                                                      7,40         No
+
+       24         Pavia-Codogno                                                                               7,06         No
+
+       25         Alessandria-Mortara-Milano                                                                 11,06         SI
+
+       26         Mortara-Novara                                                                             11,19         SI
+
+       27         Pavia-Torreberetti-Alessandria                                                              8,27         No
+
+       28         Pavia-Mortara-Vercelli                                                                      6,67         No
+
+       29         Voghera-Piacenza                                                                            5,59         No
+
+       30         Laveno-Varese-Saronno-Milano                                                                6,87         No
+
+       31         Como-Saronno-Milano                                                                         7,36         No
+
+       32         Novara-Saronno-Milano                                                                       7,46         No
+
+       33         Asso-Seveso-Milano                                                                          8,52         No
+
+       34         Brescia-Iseo-Edolo                                                                         13,03         SI
+
+       35         Malpensa-Milano                                                                             4,75         No
+
+       36         Saronno-Milano-Lodi (S1, S3, S12)                                                           5,51         No
+
+       37         Mariano/Camnago-Seveso-Milano (S2,S4)                                                       6,14         No
+
+       39         Lecco-Carnate-Milano                                                                       11,97         SI
+
+       40         Treviglio-Milano Passante-Varese                                                           10,92         SI
+
+       42         Malpensa-Varese- Mendrisio-Como (S10 S40 S50)                                               4,42         No
+
+      Tot         Totale servizio Trenord (abbonamento IVOL)                                                  7,29         No
+* Il servizio ferroviario sulla Linea Seregno-Carnate è programmato ed effettuato con servizio di Autobus.
+

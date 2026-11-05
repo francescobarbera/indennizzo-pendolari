@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indennizzo pendolari – la tua linea ha diritto al rimborso?</title>
+<meta name="description" content="Scopri in pochi secondi se la tua direttrice lombarda ha maturato l’indennizzo mensile per ritardi e soppressioni, quanto vale e entro quando chiederlo.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="">Indennizzo pendolari</a>
+<nav><a href="">Verifica</a><a href="come-richiedere/">Come richiedere</a><a href="regole/">Regole</a></nav></header>
+<main>
+<h1>La tua linea ha diritto all’indennizzo?</h1>
+<p class="lede">Ogni mese, se sulla tua direttrice almeno il 10% dei treni è stato soppresso o è arrivato con più di 15 minuti di ritardo, puoi chiedere il 30% dell’abbonamento. Non arriva in automatico: va richiesto.</p>
+<form id="check" class="card" autocomplete="off">
+  <label for="station">Stazione</label>
+  <input id="station" type="search" placeholder="Es. Morbegno" aria-describedby="station-hint" aria-controls="station-results">
+  <p id="station-hint" class="hint">Scrivi la stazione da cui parti o scegli direttamente la linea qui sotto.</p>
+  <ul id="station-results" class="suggestions" hidden></ul>
+  <p id="station-count" class="visually-hidden" aria-live="polite"></p>
+  <label for="line">Direttrice</label>
+  <select id="line" required><option value="">Scegli la direttrice</option></select>
+  <label for="pass">Tipo di abbonamento</label>
+  <select id="pass"></select>
+  <label for="price">Prezzo dell’abbonamento (€)</label>
+  <input id="price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Es. 61">
+  <p class="hint">Lo trovi sulla ricevuta o nell’app. Esempio: Morbegno–Sondrio, 2ª classe, mensile 61 €, annuale 585 €.</p>
+</form>
+<section id="result" aria-live="polite"></section>
+<section class="card soon">
+  <h2>Avvisami quando la mia linea matura l’indennizzo</h2>
+  <p>In arrivo: un’email quando esce il nuovo elenco.</p>
+  <button type="button" disabled>Presto disponibile</button>
+</section>
+<script type="module" src="js/app.mjs"></script>
+</main>
+<footer class="foot">
+<p>Sito indipendente, <strong>non affiliato a Trenord</strong>. I dati vengono dagli elenchi ufficiali pubblicati da Trenord: fa fede sempre il <a href="https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/" rel="noopener">documento ufficiale</a>.</p>
+<p><a href="privacy/">Privacy</a> · <a href="https://github.com/francescobarbera/indennizzo-pendolari" rel="noopener">Codice sorgente</a></p>
+</footer>
+</body>
+</html>

@@ -26,4 +26,4 @@ Le fixture in `test/fixtures/` sono il testo dei PDF ufficiali da luglio 2024 ad
 - Una direttrice ha diritto all'indennizzo per un mese se soppressioni più ritardi oltre 15 minuti sono almeno il 10% dei treni programmati.
 - Indennizzo: 30% del mensile, oppure 30% di un dodicesimo dell'annuale, per ogni mese. Abbonamenti integrati (TrenoCittà, IVOL): 10% della quota Trenord, non stimata qui. IVOL valutato sull'intera rete.
 - Esclusi settimanali, STIBM, IVOP e gratuiti. Sotto i 4 € non si paga.
-- Scadenza: mensile 12 mesi dalla fine di validità; annuale 12 mesi dalla pubblicazione dell'elenco (stima prudente: fine del mese M+13). Se il PDF indica una data, vale quella.
+- Scadenza: mensile 12 mesi dalla fine di validità; annuale 12 mesi dalla pubblicazione dell'elenco (l'elenco del mese M esce entro la fine di M+2, quindi stimiamo la fine di M+14). Se il PDF indica una data, vale quella.

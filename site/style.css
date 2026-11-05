@@ -1,0 +1,28 @@
+:root { --ink: #1d2433; --muted: #5b6475; --line: #dde2ea; --bg: #f6f7f9; --accent: #0b6e4f; --warn: #a33b20; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+main { max-width: 44rem; margin: 0 auto; padding: 1rem; }
+.top { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between; padding: .75rem 1rem; background: #fff; border-bottom: 1px solid var(--line); }
+.top nav { display: flex; gap: 1rem; }
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+a { color: var(--accent); }
+h1 { font-size: 1.6rem; line-height: 1.2; margin: .5rem 0; }
+.lede { color: var(--muted); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+label { display: block; font-weight: 600; margin-top: .75rem; }
+input, select { width: 100%; font: inherit; padding: .6rem; margin-top: .25rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.hint { color: var(--muted); font-size: .9rem; margin: .25rem 0; }
+.suggestions { list-style: none; padding: 0; margin: .25rem 0; border: 1px solid var(--line); border-radius: 8px; }
+.suggestions button { width: 100%; text-align: left; font: inherit; padding: .6rem; border: 0; border-bottom: 1px solid var(--line); background: #fff; cursor: pointer; }
+.summary .big { font-size: 1.25rem; font-weight: 700; }
+.warn { color: var(--warn); font-weight: 600; }
+.cta { display: inline-block; margin: .5rem 0 1rem; padding: .75rem 1rem; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th, td { text-align: left; padding: .45rem .3rem; border-bottom: 1px solid var(--line); }
+tr.yes td:nth-child(2) { color: var(--accent); font-weight: 600; }
+.soon button { font: inherit; padding: .6rem 1rem; border-radius: 8px; border: 1px solid var(--line); }
+.steps h2, details h2 { font-size: 1.1rem; }
+details { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .75rem 1rem; margin: .5rem 0; }
+summary { font-weight: 600; cursor: pointer; }
+.foot { max-width: 44rem; margin: 2rem auto; padding: 0 1rem; color: var(--muted); font-size: .9rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
