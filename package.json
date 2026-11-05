@@ -1,0 +1,14 @@
+{
+  "name": "indennizzo-pendolari",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Verifica gratuita dell'indennizzo mensile per ritardi sulle direttrici ferroviarie lombarde.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "build": "node scripts/build.mjs",
+    "update": "node scripts/update.mjs"
+  },
+  "license": "MIT"
+}

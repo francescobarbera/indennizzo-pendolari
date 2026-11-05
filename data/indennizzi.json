@@ -1,0 +1,5388 @@
+{
+  "sourcePage": "https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/",
+  "updatedAt": "2026-11-05T06:31:23.903Z",
+  "months": [
+    {
+      "month": "2024-07",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_LUGLIO_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-10"
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2024-08",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_AGOSTO_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-11"
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-11"
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2024-09",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_SETTEMBRE_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "19": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "28": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "32": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "35": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "39": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "03": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "04": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "05": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "08": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2025-12"
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": true,
+        "index": null,
+        "deadline": "2025-12"
+      }
+    },
+    {
+      "month": "2024-10",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_OTTOBRE_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-01"
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2024-11",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_NOVEMBRE_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "17": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "21": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "24": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "28": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "31": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "32": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "02": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "03": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "04": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-02"
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": true,
+        "index": null,
+        "deadline": "2026-10"
+      }
+    },
+    {
+      "month": "2024-12",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2024/indennizzo_DICEMBRE_2024.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-03"
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-03"
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-03"
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-01",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_GENNAIO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": "2026-10"
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-02",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_FEBBRAIO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-03",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_MARZO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-04",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_APRILE_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-05",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_MAGGIO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-06",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_GIUGNO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-07",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_LUGLIO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-08",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_AGOSTO_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-09",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_SETTEMBRE_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-10",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/251218_IndennizzoOttobre.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-11",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_NOVEMBRE_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2025-12",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2025/indennizzo_DICEMBRE_2025.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-01",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/indennizzo_GENNAIO_2026.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": true,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-02",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/indennizzo_FEBBRAIO_2026.pdf",
+      "format": "elenco",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": null,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": null,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": null,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-03",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_MARZO_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": 6.04,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 1.36,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": 7.25,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 1.61,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 3.99,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": 8.15,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 3.83,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": 5.99,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 3.13,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": 7.59,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 6.35,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": 6.02,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": 10.08,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 2.78,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": 7.63,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": 3.21,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": true,
+          "index": 10.31,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": 5.54,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": 2.56,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 4.17,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 2.11,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": 2.2,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": 9.46,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": 10.09,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 3.16,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 5.09,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 6.17,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": 4.91,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": 8.31,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 2.43,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": 6.81,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": 4.86,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": 9.15,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 8.62,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": 10.3,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 3,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": 3.74,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 4.15,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 1.22,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 5.13,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-04",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_APRILE_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": 5.25,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 1.36,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": 7.86,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 3.91,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 4.95,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": 5.56,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 4.75,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": 7.04,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 2.2,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": 6.45,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 3.96,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": 6.52,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": 11.11,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 3.28,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": 6.79,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": 1.89,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": 5.18,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": 4.89,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": 2.08,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 3.57,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 2.19,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": 3.61,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": 4.92,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": 5.63,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 3.85,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 3.31,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 5.31,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": 2.86,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": false,
+          "index": 6.93,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 4.1,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": 4.76,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": 4.26,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": 6.4,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 5.48,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": 9.81,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 5.83,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": 4.55,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 2.87,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 1.05,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 4.66,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-05",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_MAGGIO_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": 11.17,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 5.79,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": true,
+          "index": 10.89,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 5.8,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 7.09,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": 10.43,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 9.15,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": 11.35,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 5.1,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": 13.72,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 8.83,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": 12.93,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": 13.74,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 6,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": 13.26,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": 6.93,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": 7.92,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": true,
+          "index": 10.82,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": 4,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 9.52,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 9.21,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": 9.55,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": true,
+          "index": 11.71,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": 15.2,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 8.25,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 8.4,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 9.81,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": 8,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": 12.4,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 6.32,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": true,
+          "index": 12.39,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": true,
+          "index": 10.33,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": true,
+          "index": 10.03,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 9.78,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": 10.59,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 8.14,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": false,
+          "index": 8.58,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 8.73,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 5.01,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 9.47,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-06",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_GIUGNO_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": 11.3,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 4.64,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": 6.59,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 8.21,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 6.82,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": true,
+          "index": 10.17,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 9.74,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": 11.92,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 4.27,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": 10.9,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 8.51,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": true,
+          "index": 11.94,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": true,
+          "index": 13.06,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 4.88,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": 14.83,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": 5.56,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": true,
+          "index": 12.3,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": 7.49,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": 8,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 9.71,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 7.66,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": true,
+          "index": 11.3,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": 7.45,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": 17.36,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 7.65,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 9.83,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 9.21,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": 7.75,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": 16.81,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 4.7,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": 9.66,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": 9.66,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": 9.29,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 9.29,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": 11.68,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 8.29,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": 13.72,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 4.37,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 7.47,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 9.42,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-07",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_LUGLIO_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": true,
+          "index": 13.52,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 4.84,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": 7.6,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 6.31,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 6.42,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": 8.05,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 7.25,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": true,
+          "index": 13.71,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 4.53,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": false,
+          "index": 9.9,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 7.62,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": 7.94,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": 7.4,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 7.06,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": true,
+          "index": 11.06,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": true,
+          "index": 11.19,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": 8.27,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": 6.67,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": false,
+          "index": 5.59,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 6.87,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 7.36,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": 7.46,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": 8.52,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": true,
+          "index": 13.03,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 4.75,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 5.51,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 6.14,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": true,
+          "index": 11.97,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": 10.92,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 4.42,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": 3.99,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": 6.37,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": 8.23,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 8.52,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": true,
+          "index": 11,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 7.52,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": 11.47,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 8.88,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 4.58,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 7.29,
+        "deadline": null
+      }
+    },
+    {
+      "month": "2026-08",
+      "source": "https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Rimborsi/INDENNIZZI/2026/TABELLA_B_AGOSTO_26.pdf",
+      "format": "tabella",
+      "lines": {
+        "10": {
+          "qualifies": false,
+          "index": 4.8,
+          "deadline": null
+        },
+        "11": {
+          "qualifies": false,
+          "index": 2.01,
+          "deadline": null
+        },
+        "12": {
+          "qualifies": false,
+          "index": 4.25,
+          "deadline": null
+        },
+        "14": {
+          "qualifies": false,
+          "index": 6.72,
+          "deadline": null
+        },
+        "15": {
+          "qualifies": false,
+          "index": 4.24,
+          "deadline": null
+        },
+        "16": {
+          "qualifies": false,
+          "index": 6.66,
+          "deadline": null
+        },
+        "17": {
+          "qualifies": false,
+          "index": 4.02,
+          "deadline": null
+        },
+        "18": {
+          "qualifies": false,
+          "index": 7.47,
+          "deadline": null
+        },
+        "19": {
+          "qualifies": false,
+          "index": 4.64,
+          "deadline": null
+        },
+        "20": {
+          "qualifies": true,
+          "index": 13.4,
+          "deadline": null
+        },
+        "21": {
+          "qualifies": false,
+          "index": 8.67,
+          "deadline": null
+        },
+        "22": {
+          "qualifies": false,
+          "index": 7.36,
+          "deadline": null
+        },
+        "23": {
+          "qualifies": false,
+          "index": 4.42,
+          "deadline": null
+        },
+        "24": {
+          "qualifies": false,
+          "index": 4.24,
+          "deadline": null
+        },
+        "25": {
+          "qualifies": false,
+          "index": 8.52,
+          "deadline": null
+        },
+        "26": {
+          "qualifies": false,
+          "index": 4.01,
+          "deadline": null
+        },
+        "27": {
+          "qualifies": false,
+          "index": 8.5,
+          "deadline": null
+        },
+        "28": {
+          "qualifies": false,
+          "index": 4.73,
+          "deadline": null
+        },
+        "29": {
+          "qualifies": true,
+          "index": 10,
+          "deadline": null
+        },
+        "30": {
+          "qualifies": false,
+          "index": 7.36,
+          "deadline": null
+        },
+        "31": {
+          "qualifies": false,
+          "index": 3.76,
+          "deadline": null
+        },
+        "32": {
+          "qualifies": false,
+          "index": 6.66,
+          "deadline": null
+        },
+        "33": {
+          "qualifies": false,
+          "index": 5.65,
+          "deadline": null
+        },
+        "34": {
+          "qualifies": false,
+          "index": 8.39,
+          "deadline": null
+        },
+        "35": {
+          "qualifies": false,
+          "index": 4.38,
+          "deadline": null
+        },
+        "36": {
+          "qualifies": false,
+          "index": 5.13,
+          "deadline": null
+        },
+        "37": {
+          "qualifies": false,
+          "index": 3.26,
+          "deadline": null
+        },
+        "39": {
+          "qualifies": false,
+          "index": 6.99,
+          "deadline": null
+        },
+        "40": {
+          "qualifies": true,
+          "index": 11.98,
+          "deadline": null
+        },
+        "42": {
+          "qualifies": false,
+          "index": 2.47,
+          "deadline": null
+        },
+        "01": {
+          "qualifies": false,
+          "index": 2.83,
+          "deadline": null
+        },
+        "02": {
+          "qualifies": false,
+          "index": 5.91,
+          "deadline": null
+        },
+        "03": {
+          "qualifies": false,
+          "index": 7,
+          "deadline": null
+        },
+        "04": {
+          "qualifies": false,
+          "index": 4.87,
+          "deadline": null
+        },
+        "05": {
+          "qualifies": false,
+          "index": 5.9,
+          "deadline": null
+        },
+        "06": {
+          "qualifies": false,
+          "index": 6.38,
+          "deadline": null
+        },
+        "07": {
+          "qualifies": true,
+          "index": 12.61,
+          "deadline": null
+        },
+        "08": {
+          "qualifies": false,
+          "index": 2.49,
+          "deadline": null
+        },
+        "09": {
+          "qualifies": false,
+          "index": 3.59,
+          "deadline": null
+        }
+      },
+      "ivol": {
+        "qualifies": false,
+        "index": 5.84,
+        "deadline": null
+      }
+    }
+  ]
+}

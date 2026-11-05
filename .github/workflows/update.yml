@@ -1,0 +1,62 @@
+name: Aggiorna dati
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - run: npm test
+      - run: npm run update
+      - run: npm test
+      - id: commit
+        run: |
+          if git diff --quiet -- data/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/indennizzi.json
+          git commit -m "data: aggiorna indennizzi"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Segnala il fallimento con una issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh label create aggiornamento-fallito --color B60205 --description "Aggiornamento automatico dei dati fallito" 2>/dev/null || true
+          open=$(gh issue list --label aggiornamento-fallito --state open --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body "Fallito di nuovo: $run_url"
+          else
+            gh issue create --title "Aggiornamento dati fallito" --label aggiornamento-fallito \
+              --body "L'aggiornamento giornaliero non è riuscito e i dati pubblicati non sono stati toccati. Log: $run_url"
+          fi
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml
