@@ -5,40 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Indennizzo pendolari – la tua linea ha diritto al rimborso?</title>
 <meta name="description" content="Scopri in pochi secondi se la tua direttrice lombarda ha maturato l’indennizzo mensile per ritardi e soppressioni, quanto vale e entro quando chiederlo.">
-<link rel="icon" href="data:,">
+<meta name="theme-color" content="#FFF8EE">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='7' width='28' height='18' rx='4' fill='%235B2A86'/%3E%3Ccircle cx='2' cy='16' r='3.2' fill='%23FFF8EE'/%3E%3Ccircle cx='30' cy='16' r='3.2' fill='%23FFF8EE'/%3E%3Cpath d='M11 16.2l3.2 3.2 6.8-6.8' fill='none' stroke='%23FFC53D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="top"><a class="brand" href="">Indennizzo pendolari</a>
-<nav><a href="">Verifica</a><a href="come-richiedere/">Come richiedere</a><a href="regole/">Regole</a></nav></header>
+<header class="top"><div class="top-in">
+<a class="brand" href=""><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="2" y="7" width="28" height="18" rx="4" fill="#5B2A86"/><circle cx="2" cy="16" r="3.2" fill="#FFF8EE"/><circle cx="30" cy="16" r="3.2" fill="#FFF8EE"/><path d="M11 16.2l3.2 3.2 6.8-6.8" fill="none" stroke="#FFC53D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Indennizzo pendolari</a>
+<nav aria-label="Principale"><a href="" aria-current="page">Verifica</a><a href="come-richiedere/">Come richiedere</a><a href="regole/">Regole</a></nav>
+</div></header>
 <main>
-<h1>La tua linea ha diritto all’indennizzo?</h1>
-<p class="lede">Ogni mese, se sulla tua direttrice almeno il 10% dei treni è stato soppresso o è arrivato con più di 15 minuti di ritardo, puoi chiedere il 30% dell’abbonamento. Non arriva in automatico: va richiesto.</p>
-<form id="check" class="card" autocomplete="off">
-  <label for="station">Stazione</label>
-  <input id="station" type="search" placeholder="Es. Morbegno" aria-describedby="station-hint" aria-controls="station-results">
-  <p id="station-hint" class="hint">Scrivi la stazione da cui parti o scegli direttamente la linea qui sotto.</p>
-  <ul id="station-results" class="suggestions" hidden></ul>
-  <p id="station-count" class="visually-hidden" aria-live="polite"></p>
-  <label for="line">Direttrice</label>
-  <select id="line" required><option value="">Scegli la direttrice</option></select>
-  <label for="pass">Tipo di abbonamento</label>
-  <select id="pass"></select>
-  <label for="price">Prezzo dell’abbonamento (€)</label>
-  <input id="price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Es. 61">
-  <p class="hint">Lo trovi sulla ricevuta o nell’app. Esempio: Morbegno–Sondrio, 2ª classe, mensile 61 €, annuale 585 €.</p>
+<section class="hero">
+<div>
+<p id="updated" class="eyebrow" hidden></p>
+<h1>Il treno ti deve <em>dei soldi?</em></h1>
+<p class="lede">Scopri in 10 secondi se la tua linea ha superato la soglia dei ritardi, quanto ti spetta e entro quando chiederlo. Non arriva da solo: va richiesto, mese per mese.</p>
+</div>
+<ul class="facts" aria-label="In breve">
+<li><b>10%</b> treni in ritardo = soglia</li>
+<li><b>30%</b> dell’abbonamento = rimborso</li>
+</ul>
+</section>
+<div class="layout">
+<form id="check" class="card panel-form" autocomplete="off" aria-labelledby="form-title">
+  <h2 id="form-title" class="form-title">Verifica la tua linea</h2>
+  <div class="field">
+    <label for="station"><span class="step" aria-hidden="true">1</span>Da che stazione parti?</label>
+    <div class="search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="#5E4D6B" stroke-width="2.5"/><path d="M20 20l-4-4" stroke="#5E4D6B" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <input id="station" type="search" placeholder="Es. Morbegno" aria-describedby="station-hint" aria-controls="station-results">
+    </div>
+    <ul id="station-results" class="suggestions" hidden></ul>
+    <p id="station-hint" class="hint">Scrivi la stazione da cui parti oppure <a href="#line" data-focus="line">scegli la linea dall’elenco</a>.</p>
+    <p id="station-count" class="visually-hidden" aria-live="polite"></p>
+  </div>
+  <div class="field">
+    <label for="line"><span class="step" aria-hidden="true">2</span>Linea (direttrice)</label>
+    <select id="line" required><option value="">Scegli la direttrice</option></select>
+  </div>
+  <div class="field">
+    <fieldset class="seg" id="pass-kind">
+      <legend><span class="step" aria-hidden="true">3</span>Abbonamento</legend>
+      <label><input type="radio" name="pass-kind" value="mensile" checked><span>Mensile</span></label>
+      <label><input type="radio" name="pass-kind" value="annuale"><span>Annuale</span></label>
+    </fieldset>
+    <details class="more" id="pass-more">
+      <summary>Integrato, IVOL o altro?</summary>
+      <label for="pass">Tipo di abbonamento</label>
+      <select id="pass"></select>
+    </details>
+  </div>
+  <div class="field">
+    <label for="price"><span class="step" aria-hidden="true">4</span>Quanto lo paghi?</label>
+    <div class="money"><span aria-hidden="true">€</span><input id="price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Es. 61" aria-describedby="price-hint"></div>
+    <p id="price-hint" class="hint">Lo trovi sulla ricevuta o nell’app. Esempio: Morbegno–Sondrio, 2ª classe, mensile 61 €, annuale 585 €.</p>
+  </div>
 </form>
-<section id="result" aria-live="polite"></section>
+<div class="col">
+<section id="result" aria-live="polite" aria-label="Risultato"></section>
 <section class="card soon">
   <h2>Avvisami quando la mia linea matura l’indennizzo</h2>
   <p>In arrivo: un’email quando esce il nuovo elenco.</p>
   <button type="button" disabled>Presto disponibile</button>
 </section>
+</div>
+</div>
 <script type="module" src="js/app.mjs"></script>
 </main>
-<footer class="foot">
-<p>Sito indipendente, <strong>non affiliato a Trenord</strong>. I dati vengono dagli elenchi ufficiali pubblicati da Trenord: fa fede sempre il <a href="https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/" rel="noopener">documento ufficiale</a>.</p>
-<p><a href="privacy/">Privacy</a> · <a href="https://github.com/francescobarbera/indennizzo-pendolari" rel="noopener">Codice sorgente</a></p>
-</footer>
+<footer class="foot"><div class="foot-in">
+<div>
+<p class="badge"><span>Sito indipendente · <strong>non affiliato a Trenord</strong></span></p>
+<p>I dati vengono dagli elenchi ufficiali pubblicati da Trenord: fa fede sempre il <a href="https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/" rel="noopener">documento ufficiale</a>. Le stime sono indicative.</p>
+</div>
+<div>
+<nav aria-label="Piè di pagina"><a href="come-richiedere/">Come richiedere</a><a href="regole/">Regole</a><a href="privacy/">Privacy</a><a href="https://github.com/francescobarbera/indennizzo-pendolari" rel="noopener">Codice sorgente</a></nav>
+<p><small>Niente cookie, niente tracciamento. Le tue scelte restano solo nel tuo browser.</small></p>
+</div>
+</div></footer>
 </body>
 </html>
