@@ -149,3 +149,13 @@ test('selects drop the native look so they are as tall as the Mensile/Annuale bu
   assert.match(select, /background-image:url\("data:image\/svg\+xml/);
   assert.match(select, /background-position:right var\(--s-4\) center/);
 });
+
+test('no page links the private repo or claims "no cookies" while choices sit in localStorage', () => {
+  for (const page of PAGES) {
+    const html = read(page);
+    assert.doesNotMatch(html, /github\.com\/francescobarbera|Codice sorgente/i, page);
+    assert.doesNotMatch(html, /Niente cookie|non usa cookie/i, page);
+    assert.match(html, /Nessun tracciamento · niente analytics/, page);
+  }
+  assert.match(read('privacy/index.html'), /localStorage/);
+});
