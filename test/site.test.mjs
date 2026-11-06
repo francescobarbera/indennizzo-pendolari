@@ -105,27 +105,37 @@ test('result rendering writes text, never HTML', () => {
 const NEW_TAB = /target="_blank"/;
 const SAFE_REL = /rel="noopener noreferrer"/;
 
-test('every link in the pages opens in a new tab with noopener noreferrer (in-page #anchors excepted)', () => {
+const EXTERNAL = /href="https?:\/\//;
+
+test('external links open in a new tab with noopener noreferrer, internal links stay in the same tab', () => {
   for (const page of PAGES) {
     const links = read(page).match(/<a\s[^>]*href="[^"]*"[^>]*>/g) ?? [];
-    assert.ok(links.length > 0, page);
+    assert.ok(links.some((tag) => EXTERNAL.test(tag)), page);
+    assert.ok(links.some((tag) => !EXTERNAL.test(tag)), page);
     for (const tag of links) {
-      if (/href="#/.test(tag)) continue;
-      assert.match(tag, NEW_TAB, `${page}: ${tag}`);
-      assert.match(tag, SAFE_REL, `${page}: ${tag}`);
+      if (EXTERNAL.test(tag)) {
+        assert.match(tag, NEW_TAB, `${page}: ${tag}`);
+        assert.match(tag, SAFE_REL, `${page}: ${tag}`);
+      } else {
+        assert.doesNotMatch(tag, /target=/, `${page}: ${tag}`);
+      }
     }
   }
 });
 
-test('every link built in JS goes through newTab, which sets target and rel', () => {
+test('links built in JS: external ones go through newTab, internal ones do not', () => {
   const js = read('js/app.mjs');
   const helper = js.match(/function newTab\(a\) \{[^}]*\}/)?.[0] ?? '';
   assert.match(helper, /a\.target = '_blank'/);
   assert.match(helper, /a\.rel = 'noopener noreferrer'/);
-  const anchors = [...js.matchAll(/const (\w+) = el\('a'/g)].map((m) => m[1]);
-  assert.ok(anchors.length >= 3);
-  for (const name of anchors) assert.match(js, new RegExp(`newTab\\(${name}\\);`), name);
-  assert.doesNotMatch(js, /\.rel = 'noopener';/);
+  const hrefs = [...js.matchAll(/(\w+)\.href = ([^;]+);/g)].map((m) => ({ name: m[1], value: m[2] }));
+  assert.ok(hrefs.length >= 3);
+  for (const { name, value } of hrefs) {
+    const internal = /^'[^h#][^']*'$/.test(value);
+    if (internal) assert.doesNotMatch(js, new RegExp(`newTab\\(${name}\\);`), name);
+    else assert.match(js, new RegExp(`newTab\\(${name}\\);`), name);
+  }
+  assert.equal(js.match(/\.target = /g)?.length, 1, 'target is set only inside newTab');
   assert.doesNotMatch(js, /innerHTML|insertAdjacentHTML/);
 });
 

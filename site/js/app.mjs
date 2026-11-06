@@ -275,7 +275,6 @@ function noBlock(report, body) {
 function excludedBlock(body) {
   const link = el('a', 'Vedi quali abbonamenti sono esclusi');
   link.href = 'regole/';
-  newTab(link);
   body.append(el('p', 'Questo abbonamento è escluso dall’indennizzo.', 'near'), add(el('p'), link));
 }
 
