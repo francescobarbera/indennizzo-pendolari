@@ -159,6 +159,16 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-
 .cta:hover .arrow,.cta:focus-visible .arrow{transform:translateX(4px)}
 .cta-note{font-size:var(--fs-xs);color:var(--muted);text-align:center;margin:var(--s-2) 0 0}
 @media (min-width:600px){.cta{display:inline-flex;width:auto}.cta-note{text-align:left}}
+.claim{margin:var(--s-5) 0 0;padding:var(--s-4);border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+.claim h3{font-size:var(--fs-lg);font-weight:700;margin:0 0 var(--s-3)}
+.claim-steps{margin:0;padding-left:1.4rem;display:grid;gap:var(--s-3)}
+.claim-steps p{margin:var(--s-2) 0 0}
+.claim-data{margin:var(--s-2) 0;font-size:var(--fs-sm)}
+.claim-data dt{font-size:var(--fs-xs);font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:var(--s-2)}
+.claim-data dd{margin:0;overflow-wrap:anywhere}
+.claim-data ul{margin:0;padding-left:1.1rem}
+.claim .copy{min-height:44px}
+.claim-alt{font-size:var(--fs-sm);color:var(--muted);margin:var(--s-3) 0 0}
 
 /* months grid */
 .months-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s-3);margin:var(--s-5) 0 var(--s-3)}

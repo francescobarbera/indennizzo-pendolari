@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { buildReport, monthLabel } from '../site/js/report.mjs';
+import { buildReport, claimDetails, monthLabel } from '../site/js/report.mjs';
 
 const data = JSON.parse(readFileSync(new URL('./fixtures/indennizzi-2026-11.json', import.meta.url), 'utf8'));
 const today = new Date('2026-11-05T10:00:00Z');
@@ -31,4 +31,27 @@ test('excluded passes have nothing claimable', () => {
 
 test('month labels are Italian', () => {
   assert.equal(monthLabel('2026-08'), 'agosto 2026');
+});
+
+test('claim details list pass, line and the claimable months oldest first, ready to copy', () => {
+  const line = { code: '07', name: 'Lecco–Sondrio–Tirano' };
+  const r = buildReport({ data, lineCode: '07', passType: 'mensile', price: 61, today });
+  const d = claimDetails(r, { line, passType: 'mensile', price: 61 });
+  assert.deepEqual(d.items.map(([k]) => k), ['Abbonamento', 'Direttrice', 'Mesi da indicare']);
+  assert.match(d.items[0][1], /^Abbonamento mensile Trenord, 61,00\s€$/);
+  assert.equal(d.items[1][1], 'Dir. 07 – Lecco–Sondrio–Tirano');
+  const months = d.items[2][1].split(', ');
+  assert.equal(months.length, r.claimable);
+  assert.deepEqual(d.months, months);
+  assert.deepEqual(d.months, months);
+  assert.match(months[0], /^novembre 2025 \(entro il /);
+  assert.match(months.at(-1), /^agosto 2026 \(entro il 31 agosto 2027\)$/);
+  assert.equal(d.text.split('\n').length, 3);
+});
+
+test('claim details for IVOL name the whole network and no price', () => {
+  const r = buildReport({ data, lineCode: '', passType: 'ivol', price: 0, today });
+  const d = claimDetails(r, { line: null, passType: 'ivol', price: 0 });
+  assert.equal(d.items[0][1], 'Abbonamento IVOL (Io Viaggio Ovunque in Lombardia)');
+  assert.equal(d.items[1][1], 'Intera rete (IVOL)');
 });

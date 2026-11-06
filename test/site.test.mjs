@@ -98,7 +98,27 @@ test('the current page is marked in the navigation and the CTA keeps the officia
   }
   assert.match(read('index.html'), /<a href="" aria-current="page"[^>]*>Verifica<\/a>/);
   assert.match(read('js/app.mjs'), /https:\/\/www\.trenord\.it\/store\/#\/it\/auth\/login/);
-  assert.match(read('js/app.mjs'), /modulo ufficiale Trenord/);
+  assert.match(read('js/app.mjs'), /Accedi all’Area Personale Trenord/);
+});
+
+test('the login button is never called a form ("modulo")', () => {
+  const app = read('js/app.mjs');
+  const label = app.match(/el\('a', '([^']*)', 'cta'\)/);
+  assert.ok(label, 'CTA label found in app.mjs');
+  assert.equal(label[1].trim(), 'Accedi all’Area Personale Trenord');
+  const page = read('come-richiedere/index.html');
+  const ctas = [...page.matchAll(/<a class="cta"[^>]*>([^<]*)</g)].map((m) => m[1].trim());
+  assert.deepEqual(ctas, ['Accedi all’Area Personale Trenord']);
+  for (const text of [label[1], ...ctas]) assert.doesNotMatch(text, /modulo/i);
+});
+
+test('the result explains how to claim, with official times, alternatives and source', () => {
+  const app = read('js/app.mjs');
+  for (const needle of ['Come richiederlo', 'Tieni pronti questi dati', 'compilare il form online dedicato, selezionando la tessera e l’abbonamento',
+    'entro 30 giorni', 'trenord.it e malpensaexpress.it entro 12 mesi', 'convertirlo in denaro', '02-72494949', 'MyLink Point',
+    'rimborsi@pec.trenord.it', 'entro il giorno 5', 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/']) {
+    assert.ok(app.includes(needle), needle);
+  }
 });
 
 test('result rendering writes text, never HTML', () => {

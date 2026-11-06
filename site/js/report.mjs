@@ -41,3 +41,18 @@ export function dateLabel(date) {
 export function euro(amount) {
   return amount.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
 }
+
+// What to have ready when claiming: taken from the result so the user can copy it.
+export function claimDetails(report, { line, passType, price }) {
+  const pass = PASS_TYPES[passType];
+  const priced = price > 0 && !pass.integrated && !pass.excluded;
+  const months = report.rows.filter((r) => r.claimable)
+    .sort((a, b) => a.month.localeCompare(b.month))
+    .map((r) => `${monthLabel(r.month)} (entro il ${dateLabel(r.deadline)})`);
+  const items = [
+    ['Abbonamento', priced ? `${pass.label}, ${euro(price)}` : pass.label],
+    ['Direttrice', line ? `Dir. ${line.code} – ${line.name}` : 'Intera rete (IVOL)'],
+    ['Mesi da indicare', months.join(', ')],
+  ];
+  return { items, months, text: items.map(([k, v]) => `${k}: ${v}`).join('\n') };
+}
