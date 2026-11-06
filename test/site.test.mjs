@@ -93,11 +93,49 @@ test('the current page is marked in the navigation and the CTA keeps the officia
     assert.equal((html.match(/aria-current="page"/g) ?? []).length, 1, page);
     if (page !== 'index.html') assert.ok(html.includes(needle), page);
   }
-  assert.match(read('index.html'), /<a href="" aria-current="page">Verifica<\/a>/);
+  assert.match(read('index.html'), /<a href="" aria-current="page"[^>]*>Verifica<\/a>/);
   assert.match(read('js/app.mjs'), /https:\/\/www\.trenord\.it\/store\/#\/it\/auth\/login/);
   assert.match(read('js/app.mjs'), /modulo ufficiale Trenord/);
 });
 
 test('result rendering writes text, never HTML', () => {
   for (const f of ['js/app.mjs', 'js/prefs.mjs', 'js/view.mjs']) assert.doesNotMatch(read(f), /innerHTML|outerHTML|insertAdjacentHTML/, f);
+});
+
+const NEW_TAB = /target="_blank"/;
+const SAFE_REL = /rel="noopener noreferrer"/;
+
+test('every link in the pages opens in a new tab with noopener noreferrer (in-page #anchors excepted)', () => {
+  for (const page of PAGES) {
+    const links = read(page).match(/<a\s[^>]*href="[^"]*"[^>]*>/g) ?? [];
+    assert.ok(links.length > 0, page);
+    for (const tag of links) {
+      if (/href="#/.test(tag)) continue;
+      assert.match(tag, NEW_TAB, `${page}: ${tag}`);
+      assert.match(tag, SAFE_REL, `${page}: ${tag}`);
+    }
+  }
+});
+
+test('every link built in JS goes through newTab, which sets target and rel', () => {
+  const js = read('js/app.mjs');
+  const helper = js.match(/function newTab\(a\) \{[^}]*\}/)?.[0] ?? '';
+  assert.match(helper, /a\.target = '_blank'/);
+  assert.match(helper, /a\.rel = 'noopener noreferrer'/);
+  const anchors = [...js.matchAll(/const (\w+) = el\('a'/g)].map((m) => m[1]);
+  assert.ok(anchors.length >= 3);
+  for (const name of anchors) assert.match(js, new RegExp(`newTab\\(${name}\\);`), name);
+  assert.doesNotMatch(js, /\.rel = 'noopener';/);
+  assert.doesNotMatch(js, /innerHTML|insertAdjacentHTML/);
+});
+
+test('selects drop the native look so they are as tall as the Mensile/Annuale buttons', () => {
+  const css = read('style.css');
+  const minHeight = (rule) => css.match(new RegExp(`${rule}\\{[^}]*min-height:(\\d+px)`))?.[1];
+  assert.equal(minHeight('input,select'), minHeight('\\.seg label'));
+  const select = css.match(/(^|\n)select\{[^}]*\}/)?.[0] ?? '';
+  assert.match(select, /-webkit-appearance:none/);
+  assert.match(select, /appearance:none/);
+  assert.match(select, /background-image:url\("data:image\/svg\+xml/);
+  assert.match(select, /background-position:right var\(--s-4\) center/);
 });
