@@ -55,7 +55,8 @@ main.page{max-width:44rem}
 .hero{position:relative;padding:var(--s-4) 0 var(--s-5)}
 .eyebrow{display:inline-flex;align-items:center;gap:var(--s-2);font-weight:700;font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--sun-ink);background:var(--sun-soft);border:1px solid #F3DC92;padding:var(--s-1) var(--s-3);border-radius:var(--r-pill);margin:0}
 .eyebrow::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--sun-ink)}
-.eyebrow[hidden]{display:none}
+/* keeps its space until the data arrives, so nothing below it moves */
+.eyebrow[hidden]{display:inline-flex;visibility:hidden}
 h1{font-size:var(--fs-2xl);font-weight:800;margin:var(--s-3) 0;max-width:20ch;text-wrap:balance}
 h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--sun) 62% 92%,transparent 92%);padding-inline:.06em;white-space:nowrap}
 .lede{color:var(--muted);font-size:var(--fs-lg);max-width:38rem;margin:0}

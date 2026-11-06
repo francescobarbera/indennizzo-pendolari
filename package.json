@@ -4,12 +4,16 @@
   "private": true,
   "type": "module",
   "description": "Verifica gratuita dell'indennizzo mensile per ritardi sulle direttrici ferroviarie lombarde.",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "node --test \"test/*.test.mjs\"",
     "build": "node scripts/build.mjs",
     "update": "node scripts/update.mjs",
-    "check:data": "node scripts/check-data.mjs"
+    "check:data": "node scripts/check-data.mjs",
+    "lighthouse": "npx --yes @lhci/cli@0.16.0 autorun --config=lighthouse/mobile.json && npx --yes @lhci/cli@0.16.0 autorun --config=lighthouse/desktop.json",
+    "lighthouse:live": "npx --yes @lhci/cli@0.16.0 autorun --config=lighthouse/live-mobile.json && npx --yes @lhci/cli@0.16.0 autorun --config=lighthouse/live-desktop.json"
   },
   "license": "MIT"
 }

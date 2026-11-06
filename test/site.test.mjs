@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, statSync } from 'node:fs';
 
 const PAGES = ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html'];
+const BEACON = 'https://static.cloudflareinsights.com/beacon.min.js';
 const read = (p) => readFileSync(new URL(`../site/${p}`, import.meta.url), 'utf8');
 
 test('every page is Italian, mobile-ready and carries the disclaimer and official link', () => {
@@ -27,7 +28,8 @@ test('email alerts are only a disabled placeholder', () => {
 
 test('the check page stays light: no third-party scripts and small assets', () => {
   const html = read('index.html');
-  assert.doesNotMatch(html, /<script[^>]+src="https?:/);
+  const external = (html.match(/<script[^>]+src="https?:[^"]*"/g) ?? []).map((t) => t.match(/src="([^"]*)"/)[1]);
+  assert.deepEqual(external, [BEACON]);
   const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs',
     'js/prefs.mjs', 'js/view.mjs'];
   const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0);
@@ -53,8 +55,14 @@ test('the display font is self-hosted and small', () => {
 test('no page or stylesheet loads fonts, styles or scripts from another origin', () => {
   for (const page of PAGES) {
     const html = read(page);
-    assert.doesNotMatch(html, /<script[^>]+src="(https?:)?\/\//, page);
-    assert.doesNotMatch(html, /<link[^>]+href="(https?:)?\/\//, page);
+    // The only script from another origin is the cookieless Cloudflare Web Analytics beacon.
+    for (const tag of html.match(/<script[^>]+src="(https?:)?\/\/[^"]*"[^>]*>/g) ?? []) {
+      assert.match(tag, /^<script defer src="https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js" data-cf-beacon='\{"token": "[A-Za-z0-9_-]+"\}'>$/, page);
+    }
+    // rel="canonical" names the page's own address; it loads nothing.
+    for (const link of html.match(/<link[^>]*>/g)) {
+      if (!/rel="canonical"/.test(link)) assert.doesNotMatch(link, /href="(https?:)?\/\//, page);
+    }
     assert.doesNotMatch(html, /fonts\.(googleapis|gstatic)\.com/, page);
     assert.doesNotMatch(html, /<style/, page);
   }
@@ -154,8 +162,9 @@ test('no page links the private repo or claims "no cookies" while choices sit in
   for (const page of PAGES) {
     const html = read(page);
     assert.doesNotMatch(html, /github\.com\/francescobarbera|Codice sorgente/i, page);
-    assert.doesNotMatch(html, /Niente cookie|non usa cookie/i, page);
-    assert.match(html, /Nessun tracciamento · niente analytics/, page);
+    assert.doesNotMatch(html, /Niente cookie(?! di tracciamento)|non usa cookie(?! di tracciamento)/i, page);
+    assert.match(html, /Niente cookie di tracciamento · statistiche anonime/, page);
+    assert.doesNotMatch(html, /niente analytics/, page);
   }
   assert.match(read('privacy/index.html'), /localStorage/);
 });
@@ -191,4 +200,50 @@ test('below 4 € the verdict is never yes', () => {
   const js = read('js/app.mjs');
   assert.match(js, /Sotto i 4 €: niente indennizzo/);
   assert.match(js, /const yes = report\.claimable > 0/);
+});
+
+const PAGE_URLS = { 'index.html': '', 'come-richiedere/index.html': 'come-richiedere/', 'regole/index.html': 'regole/', 'privacy/index.html': 'privacy/' };
+
+test('every page has its canonical URL on iltrenotideve.eu, Open Graph and Twitter card', () => {
+  for (const [page, path] of Object.entries(PAGE_URLS)) {
+    const html = read(page);
+    const url = `https://iltrenotideve.eu/${path}`;
+    const one = (re) => assert.equal((html.match(new RegExp(re, 'g')) ?? []).length, 1, `${page}: ${re}`);
+    one(`<link rel="canonical" href="${url}">`);
+    one(`<meta property="og:url" content="${url}">`);
+    one('<meta property="og:site_name" content="Il treno ti deve">');
+    one('<meta property="og:locale" content="it_IT">');
+    one('<meta property="og:title" content="[^"]+">');
+    one('<meta property="og:description" content="[^"]+">');
+    one('<meta property="og:image" content="https://iltrenotideve.eu/og.png">');
+    one('<meta name="twitter:card" content="summary_large_image">');
+    one('<link rel="apple-touch-icon" href="/apple-touch-icon.png">');
+    one('<link rel="icon" href="/favicon.ico"');
+  }
+});
+
+test('preview image is 1200×630, icons, robots.txt and sitemap.xml exist', () => {
+  const png = readFileSync(new URL('../site/og.png', import.meta.url));
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+  const touch = readFileSync(new URL('../site/apple-touch-icon.png', import.meta.url));
+  assert.equal(touch.readUInt32BE(16), 180);
+  const ico = readFileSync(new URL('../site/favicon.ico', import.meta.url));
+  assert.deepEqual([...ico.subarray(0, 4)], [0, 0, 1, 0]);
+  assert.match(read('robots.txt'), /^Sitemap: https:\/\/iltrenotideve\.eu\/sitemap\.xml$/m);
+  const sitemap = read('sitemap.xml');
+  for (const path of Object.values(PAGE_URLS)) assert.match(sitemap, new RegExp(`<loc>https://iltrenotideve\\.eu/${path}</loc>`));
+});
+
+test('the home page says the refund is a voucher', () => {
+  assert.match(read('index.html'), /voucher/);
+});
+
+test('every page loads the Cloudflare Web Analytics beacon once, deferred, and the privacy page explains it', () => {
+  for (const page of Object.keys(PAGE_URLS)) {
+    const html = read(page);
+    assert.equal((html.match(/static\.cloudflareinsights\.com\/beacon\.min\.js/g) ?? []).length, 1, page);
+    assert.match(html, /<script defer src="https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js"/, page);
+  }
+  assert.match(read('privacy/index.html'), /Cloudflare Web Analytics\. Il suo script non salva cookie e non identifica chi visita/);
 });
