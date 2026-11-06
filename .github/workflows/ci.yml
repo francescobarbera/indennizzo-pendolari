@@ -19,7 +19,6 @@ jobs:
 
   lighthouse:
     # Every page must score 100 in all four categories, on mobile and desktop.
-    # The analytics beacon is blocked here: it only answers the real domain, so it is checked live after deploy.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

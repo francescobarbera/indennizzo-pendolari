@@ -11,10 +11,7 @@
       "numberOfRuns": 1,
       "settings": {
         "preset": "desktop",
-        "chromeFlags": "--no-sandbox --headless=new",
-        "blockedUrlPatterns": [
-          "*cloudflareinsights.com*"
-        ]
+        "chromeFlags": "--no-sandbox --headless=new"
       }
     },
     "assert": {

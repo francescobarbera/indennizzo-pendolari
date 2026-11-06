@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { readFileSync, statSync } from 'node:fs';
 
 const PAGES = ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html'];
-const BEACON = 'https://static.cloudflareinsights.com/beacon.min.js';
 const read = (p) => readFileSync(new URL(`../site/${p}`, import.meta.url), 'utf8');
 
 test('every page is Italian, mobile-ready and carries the disclaimer and official link', () => {
@@ -28,8 +27,7 @@ test('email alerts are only a disabled placeholder', () => {
 
 test('the check page stays light: no third-party scripts and small assets', () => {
   const html = read('index.html');
-  const external = (html.match(/<script[^>]+src="https?:[^"]*"/g) ?? []).map((t) => t.match(/src="([^"]*)"/)[1]);
-  assert.deepEqual(external, [BEACON]);
+  assert.doesNotMatch(html, /<script[^>]+src="https?:/);
   const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs',
     'js/prefs.mjs', 'js/view.mjs'];
   const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0);
@@ -55,10 +53,7 @@ test('the display font is self-hosted and small', () => {
 test('no page or stylesheet loads fonts, styles or scripts from another origin', () => {
   for (const page of PAGES) {
     const html = read(page);
-    // The only script from another origin is the cookieless Cloudflare Web Analytics beacon.
-    for (const tag of html.match(/<script[^>]+src="(https?:)?\/\/[^"]*"[^>]*>/g) ?? []) {
-      assert.match(tag, /^<script defer src="https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js" data-cf-beacon='\{"token": "[A-Za-z0-9_-]+"\}'>$/, page);
-    }
+    assert.doesNotMatch(html, /<script[^>]+src="(https?:)?\/\//, page);
     // rel="canonical" names the page's own address; it loads nothing.
     for (const link of html.match(/<link[^>]*>/g)) {
       if (!/rel="canonical"/.test(link)) assert.doesNotMatch(link, /href="(https?:)?\/\//, page);
@@ -162,9 +157,8 @@ test('no page links the private repo or claims "no cookies" while choices sit in
   for (const page of PAGES) {
     const html = read(page);
     assert.doesNotMatch(html, /github\.com\/francescobarbera|Codice sorgente/i, page);
-    assert.doesNotMatch(html, /Niente cookie(?! di tracciamento)|non usa cookie(?! di tracciamento)/i, page);
-    assert.match(html, /Niente cookie di tracciamento · statistiche anonime/, page);
-    assert.doesNotMatch(html, /niente analytics/, page);
+    assert.doesNotMatch(html, /Niente cookie|non usa cookie/i, page);
+    assert.match(html, /Nessun tracciamento · niente analytics/, page);
   }
   assert.match(read('privacy/index.html'), /localStorage/);
 });
@@ -239,11 +233,3 @@ test('the home page says the refund is a voucher', () => {
   assert.match(read('index.html'), /voucher/);
 });
 
-test('every page loads the Cloudflare Web Analytics beacon once, deferred, and the privacy page explains it', () => {
-  for (const page of Object.keys(PAGE_URLS)) {
-    const html = read(page);
-    assert.equal((html.match(/static\.cloudflareinsights\.com\/beacon\.min\.js/g) ?? []).length, 1, page);
-    assert.match(html, /<script defer src="https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js"/, page);
-  }
-  assert.match(read('privacy/index.html'), /Cloudflare Web Analytics\. Il suo script non salva cookie e non identifica chi visita/);
-});

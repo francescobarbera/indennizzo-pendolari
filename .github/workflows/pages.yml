@@ -38,7 +38,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   lighthouse-live:
-    # The deployed site, beacon included, must still score 100 everywhere.
+    # The deployed site must still score 100 everywhere.
     needs: deploy
     runs-on: ubuntu-latest
     permissions:
