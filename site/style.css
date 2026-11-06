@@ -40,7 +40,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:var(--lh-tight);letter-spac
 .linkish:hover{color:var(--brand-strong)}
 
 /* header */
-.top{position:sticky;top:0;z-index:5;background:rgb(255 248 238 / .92);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
 .top-in{max-width:72rem;margin:0 auto;padding:var(--s-3) var(--s-4);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-2) var(--s-4)}
 .brand{display:inline-flex;align-items:center;gap:var(--s-2);font:800 var(--fs-lg)/1 var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.02em;min-height:44px}
 .brand svg{flex:none}
