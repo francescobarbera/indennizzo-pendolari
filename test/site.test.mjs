@@ -253,3 +253,15 @@ test('the home page says the refund is a voucher', () => {
   assert.match(read('index.html'), /voucher/);
 });
 
+
+test('every page links the contact address and says it is not a Trenord channel', () => {
+  for (const page of ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html']) {
+    const html = read(page);
+    assert.match(html, /<footer[\s\S]*<a href="mailto:info@iltrenotideve\.eu">info@iltrenotideve\.eu<\/a>[\s\S]*<\/footer>/, page);
+    assert.match(html, /<footer[\s\S]*Non è un canale Trenord[\s\S]*<\/footer>/, page);
+  }
+  const main = read('privacy/index.html').split('<footer')[0];
+  assert.match(main, /<h2>Contatti<\/h2>/);
+  assert.match(main, /mailto:info@iltrenotideve\.eu/);
+  assert.match(main, /Non è un canale Trenord: per le richieste di indennizzo/);
+});
