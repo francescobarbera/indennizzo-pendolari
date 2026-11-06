@@ -561,6 +561,7 @@ function showStep() {
   $('progress-label').textContent = `Passo ${n} di ${STEPS}`;
   document.querySelectorAll('.progress-bar i').forEach((bar, i) => { bar.className = i + 1 < n ? 'done' : i + 1 === n ? 'on' : ''; });
   $('back').disabled = step === '1';
+  $('back').hidden = step === '1';
   $('next').textContent = n === total ? 'Vedi il risultato →' : 'Avanti →';
   const annual = $('pass').value === 'annuale';
   $('price-lede').textContent = `Scrivi il prezzo del tuo abbonamento ${annual ? 'annuale' : 'mensile'}, in euro.`;

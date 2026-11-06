@@ -43,6 +43,31 @@ test('the home page is a 3-step guided check with big back/next buttons and help
   assert.match(js, /'Altri dettagli'/);
 });
 
+test('designer v2 review: hero stacks on desktop, months stay bulleted, back hides on step 1', () => {
+  const css = read('style.css');
+  const js = read('js/app.mjs');
+  // 1: guided hero is block (not the v1 2-col stamp grid); lede ~60ch
+  assert.match(css, /\.hero-wiz\{[^}]*display:block/);
+  assert.match(css, /\.hero-wiz \.lede\{[^}]*max-width:60ch/);
+  assert.match(css, /\.hero-wiz\{display:block;grid-template-columns:none\}/);
+  // 2: months under «Cosa fare adesso» are a ul with discs, not a nested ol
+  assert.match(js, /el\('ul', undefined, 'claim-months'\)/);
+  assert.match(css, /\.claim-months\{[^}]*list-style:disc/);
+  assert.match(css, /\.now-steps>li::before/);
+  // 3: hero only on step 1
+  assert.match(js, /classList\.toggle\('in-flow', step !== '1'\)/);
+  assert.match(css, /\.wiz-main\.in-flow \.hero-wiz\{display:none\}/);
+  // 4: sticky header clearance
+  assert.match(css, /html\{[^}]*scroll-padding-top:8rem/);
+  assert.match(css, /#result\{scroll-margin-top:8rem\}/);
+  // 5: Indietro never wraps
+  assert.match(css, /\.wiz \.btn[^{]*\{[^}]*white-space:nowrap/);
+  // 6: Indietro hidden (not only disabled) on step 1; nav collapses to one column
+  assert.match(js, /\$\('back'\)\.hidden = step === '1'/);
+  assert.match(css, /#back\[hidden\],\.btn\[hidden\]\{display:none\}/);
+  assert.match(css, /\.nav-row:has\(#back\[hidden\]\)\{grid-template-columns:1fr\}/);
+});
+
 test('the check page stays light: no third-party scripts and small assets', () => {
   const html = read('index.html');
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
