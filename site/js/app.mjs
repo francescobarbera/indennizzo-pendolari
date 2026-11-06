@@ -4,6 +4,7 @@ import { normalize, searchStations } from './stations.mjs';
 import { buildReport, claimDetails, dateLabel, euro, monthLabel } from './report.mjs';
 import { MAIN_PASSES, OTHER_PASSES, browserStorage, loadPrefs, passChoice, passFromChoice, savePrefs } from './prefs.mjs';
 import { PASS_SHORT, barWidth, deadlineInfo, monthParts, percent, tileState, worstMonth } from './view.mjs';
+import { STEPS, isComplete, lastStep, lineChoice, linePlain, linesForStation, parsePrice, stepError } from './wizard.mjs';
 
 const CLAIM_URL = 'https://www.trenord.it/store/#/it/auth/login';
 const FORM_URL = 'https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Reclami/M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
@@ -23,11 +24,10 @@ const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)'
 const storage = browserStorage();
 
 let data = null;
-let lastKey = '';
-let scrollAfterRender = false;
+let step = '1';
 
 function fillSelects() {
-  LINES.forEach((l) => $('line').append(new Option(`Dir. ${l.code} – ${l.name}`, l.code)));
+  LINES.forEach((l) => $('line').append(new Option(linePlain(l.code).full, l.code)));
   const groups = [['Più comuni', MAIN_PASSES], ['Altri abbonamenti', OTHER_PASSES]];
   for (const [label, keys] of groups) {
     const group = document.createElement('optgroup');
@@ -58,6 +58,7 @@ function restore() {
 
 function focusLine(event) {
   event?.preventDefault();
+  $('line-more').open = true;
   $('line').focus();
 }
 
@@ -79,14 +80,39 @@ function closeSuggestions() {
   $('station-results').hidden = true;
 }
 
-function pickStation(name, code) {
-  $('line').value = code;
+// A station picked or typed: one line is chosen for the user, several open the "which line" screen.
+function pickStation(name) {
   $('station').value = name;
   closeSuggestions();
   $('station-count').textContent = '';
-  scrollAfterRender = true;
+  const choice = lineChoice(linesForStation(name));
+  if (choice.auto) $('line').value = choice.auto;
+  else if (choice.choose && !choice.choose.includes($('line').value)) $('line').value = '';
+  showLine();
   save();
-  render();
+  return choice;
+}
+
+function showLine() {
+  const plain = linePlain($('line').value);
+  $('auto-line').hidden = !plain;
+  $('auto-line-name').textContent = plain ? plain.full : '';
+}
+
+function lineCards(codes) {
+  const box = $('line-cards');
+  box.querySelectorAll('label').forEach((n) => n.remove());
+  $('hub-lede').textContent = `Da ${$('station').value} passano più linee. Tocca quella che prendi di solito.`;
+  for (const code of codes) {
+    const plain = linePlain(code);
+    const input = el('input');
+    input.type = 'radio';
+    input.name = 'line-card';
+    input.value = code;
+    input.checked = $('line').value === code;
+    input.addEventListener('change', () => { $('line').value = code; showLine(); save(); });
+    box.append(add(el('label', undefined, 'card-opt'), input, el('span', plain.ends, 't'), el('span', plain.via || plain.full, 's')));
+  }
 }
 
 function showSuggestions() {
@@ -94,23 +120,18 @@ function showSuggestions() {
   const query = $('station').value;
   list.replaceChildren();
   const found = searchStations(query);
-  let count = 0;
   for (const s of found) {
-    for (const code of s.lines) {
-      const line = LINES.find((l) => l.code === code);
-      const button = el('button');
-      button.type = 'button';
-      const name = nameWithMatch(s.name, query);
-      name.append(el('small', `Dir. ${code} · ${line.name}`));
-      button.append(el('span', code, 'code'), name);
-      button.addEventListener('click', () => pickStation(s.name, code));
-      list.append(add(el('li'), button));
-      count += 1;
-    }
+    const button = el('button');
+    button.type = 'button';
+    const name = nameWithMatch(s.name, query);
+    name.append(el('small', s.lines.length === 1 ? linePlain(s.lines[0]).full : `${s.lines.length} linee`));
+    button.append(name);
+    button.addEventListener('click', () => { pickStation(s.name); $('next').focus(); });
+    list.append(add(el('li'), button));
   }
   const typed = query.trim();
-  if (!count && normalize(typed).length >= 2) {
-    const p = el('p', `Nessuna stazione per “${typed}”. Controlla l’ortografia o `, 'empty');
+  if (!found.length && normalize(typed).length >= 2) {
+    const p = el('p', `Nessuna stazione per “${typed}”. Controlla come l’hai scritta o `, 'empty');
     const link = el('button', 'scegli la linea dall’elenco', 'linkish');
     link.type = 'button';
     link.addEventListener('click', () => { closeSuggestions(); focusLine(); });
@@ -119,7 +140,7 @@ function showSuggestions() {
   }
   list.hidden = list.children.length === 0;
   $('station-count').textContent = typed
-    ? (count ? `${count} ${count === 1 ? 'risultato' : 'risultati'}` : 'Nessuna stazione trovata')
+    ? (found.length ? `${found.length} ${found.length === 1 ? 'stazione' : 'stazioni'}` : 'Nessuna stazione trovata')
     : '';
 }
 
@@ -168,7 +189,7 @@ const plainEuro = (n) => `${n.toLocaleString('it-IT', { maximumFractionDigits: 2
 function ticketHead(report, ctx, yes) {
   const head = el('div', undefined, 'ticket-head');
   const meta = el('div', undefined, 'ticket-meta');
-  meta.append(el('span', ctx.line ? `Dir. ${ctx.line.code} · ${ctx.line.name}` : 'Intera rete', 'chip'));
+  meta.append(el('span', ctx.line ? linePlain(ctx.line.code).ends : 'Intera rete', 'chip'));
   meta.append(el('span', `${PASS_SHORT[ctx.passType]}${ctx.price > 0 && !report.pass.integrated && !report.pass.excluded ? ` · ${plainEuro(ctx.price)}` : ''}`, 'chip'));
   const stamp = el('div', yes ? 'SÌ' : 'NO', 'stamp');
   stamp.setAttribute('aria-hidden', 'true');
@@ -205,8 +226,9 @@ function amountBlock(report, ctx, body) {
     body.append(amount);
     const base = pass.monthsCovered === 12 ? `30% di 1/12 di ${plainEuro(ctx.price)}` : `30% di ${plainEuro(ctx.price)}`;
     body.append(add(el('p', undefined, 'calc'), bold(mesi(report.claimable)), ' × ', bold(euro(refund.amount)), ` (${base})`));
-    body.append(el('p', 'Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi, a questo prezzo.', 'calc condition'));
-    body.append(el('p', 'Arriva come voucher Trenord, non in denaro: puoi chiedere di convertirlo in denaro entro 12 mesi dall’emissione.', 'calc voucher'));
+    body.append(add(el('div', undefined, 'must'),
+      el('p', 'Ti spetta se avevi un abbonamento valido per questa linea in ciascuno di questi mesi, a questo prezzo.', 'condition'),
+      el('p', 'Arriva come voucher Trenord (un buono), non in denaro: puoi chiedere di convertirlo in denaro entro 12 mesi dall’emissione.', 'voucher')));
   } else if (refund.status === 'below-min') {
     body.append(add(el('div', undefined, 'note-box'), el('p', `L’importo (${euro(refund.amount)}) è sotto i 4 €: non viene erogato.`)));
   } else if (refund.status === 'integrated') {
@@ -214,7 +236,7 @@ function amountBlock(report, ctx, body) {
   } else if (refund.status === 'need-price') {
     const prompt = el('button', 'Inserisci il prezzo per vedere l’importo', 'linkish');
     prompt.type = 'button';
-    prompt.addEventListener('click', () => $('price').focus());
+    prompt.addEventListener('click', () => goTo('3'));
     body.append(add(el('div', undefined, 'note-box'), add(el('p'), prompt)));
   }
   if (pass.scope === 'network') body.append(el('p', 'Gli IVOL sono valutati sull’intera rete, non sulla singola direttrice.', 'hint'));
@@ -260,33 +282,60 @@ function copyButton(text) {
   return button;
 }
 
+function source(estimate) {
+  const info = el('a', 'pagina ufficiale Trenord sull’indennizzo per ritardi');
+  info.href = INFO_URL;
+  newTab(info);
+  return add(el('p', undefined, 'source'), 'Fonte: ', info, estimate ? '. Stima indicativa: fa fede Trenord.' : '.');
+}
+
+function helpBox() {
+  const mail = el('a', 'info@iltrenotideve.eu');
+  mail.href = 'mailto:info@iltrenotideve.eu';
+  return add(el('div', undefined, 'help-box'), el('p', 'Hai bisogno di aiuto? Scrivici'), mail,
+    el('p', 'Non siamo Trenord: la richiesta va fatta a Trenord.', 'help-note'));
+}
+
+function nowSteps(items) {
+  const box = el('section', undefined, 'now');
+  box.setAttribute('aria-labelledby', 'now-h');
+  const h = el('h3', 'Cosa fare adesso', 'section-title');
+  h.id = 'now-h';
+  const list = el('ol', undefined, 'now-steps');
+  for (const [what, need] of items) list.append(add(el('li'), ...[].concat(what), add(el('span', undefined, 'need'), ...[].concat(need))));
+  box.append(h, list);
+  return box;
+}
+
 function claimBlock(report, ctx, body) {
-  const box = el('section', undefined, 'claim');
-  box.setAttribute('aria-labelledby', 'claim-h');
-  const h = el('h3', 'Come richiederlo');
-  h.id = 'claim-h';
   const details = claimDetails(report, ctx);
-  const list = el('dl', undefined, 'claim-data');
-  list.append(el('dt', 'Tessera'), el('dd', 'Il numero della tua tessera Trenord'));
-  details.items.forEach(([k, v]) => {
-    const dd = k === 'Mesi indennizzabili' ? add(el('dd'), add(el('ul'), ...details.months.map((m) => el('li', m)))) : el('dd', v);
-    list.append(el('dt', k), dd);
-  });
-  const ready = add(el('li'), bold('Tieni pronti questi dati.'), list);
-  if (navigator.clipboard) ready.append(copyButton(details.text));
   const cta = el('a', 'Accedi all’Area Personale Trenord ', 'cta');
   cta.href = CLAIM_URL;
   newTab(cta);
   const arrow = el('span', '→', 'arrow');
   arrow.setAttribute('aria-hidden', 'true');
   cta.append(arrow);
-  const login = add(el('li'), bold('Accedi all’Area Personale'), ' su trenord.it.', add(el('p'), cta));
-  const form = add(el('li'), bold('Compila il form online dedicato.'),
-    ' Trenord dice di «accedere alla tua Area Personale e compilare il form online dedicato, selezionando la tessera e l’abbonamento per cui inoltrare la tua domanda».');
-  if (ctx.passType === 'annuale') form.append(' Per l’annuale Trenord suggerisce di chiedere mese per mese.');
-  const after = add(el('li'), bold('Ricevi il voucher.'),
-    ' Arriva entro 30 giorni dalla richiesta. Lo usi su trenord.it e malpensaexpress.it entro 12 mesi dall’emissione, ed entro 12 mesi puoi chiedere di convertirlo in denaro.');
-  const steps = add(el('ol', undefined, 'claim-steps'), ready, login, form, after);
+  body.append(cta);
+  const months = add(el('ul', undefined, 'claim-months'), ...details.months.map((m) => el('li', m)));
+  const need2 = ['Ti serve: il numero della tua tessera Trenord e i mesi da chiedere:', months];
+  if (navigator.clipboard) need2.push(copyButton(details.text));
+  const form = [bold('Compila il form online dedicato'), ', scegliendo la tessera e l’abbonamento.'];
+  if (ctx.passType === 'annuale') form.push(' Per l’annuale Trenord suggerisce di chiedere mese per mese.');
+  body.append(nowSteps([
+    [[bold('Accedi all’Area Personale Trenord'), ' con il pulsante qui sopra.'], 'Ti serve: l’email e la password del tuo account Trenord.'],
+    [form, need2],
+    [[bold('Ricevi il voucher'), ' entro 30 giorni dalla richiesta.'],
+      'Lo usi su trenord.it e malpensaexpress.it entro 12 mesi dall’emissione; entro 12 mesi puoi anche chiedere di convertirlo in denaro.'],
+  ]));
+}
+
+// Everything else for a YES result, kept out of the way under "Altri dettagli".
+function claimExtras(report, ctx) {
+  const box = el('div', undefined, 'claim');
+  const details = claimDetails(report, ctx);
+  const list = el('dl', undefined, 'claim-data');
+  details.items.filter(([k]) => k !== 'Mesi indennizzabili').forEach(([k, v]) => list.append(el('dt', k), el('dd', v)));
+  box.append(list, el('p', 'Trenord dice di «accedere alla tua Area Personale e compilare il form online dedicato, selezionando la tessera e l’abbonamento per cui inoltrare la tua domanda».', 'claim-alt'));
   const phone = el('a', '02-72494949');
   phone.href = 'tel:+390272494949';
   const pec = el('a', 'rimborsi@pec.trenord.it');
@@ -294,11 +343,10 @@ function claimBlock(report, ctx, body) {
   const paper = el('a', 'modulo Trenord');
   paper.href = FORM_URL;
   newTab(paper);
-  const help = add(el('p', undefined, 'claim-alt'), bold('Ti serve aiuto? '), 'Chiama l’assistenza al ', phone, ' (tutti i giorni dalle 6 a mezzanotte).');
-  const offline = add(el('p', undefined, 'claim-alt'), bold('Senza Area Personale: '),
+  box.append(add(el('p', undefined, 'claim-alt'), bold('Assistenza Trenord: '), 'chiama il ', phone, ' (tutti i giorni dalle 6 a mezzanotte).'));
+  box.append(add(el('p', undefined, 'claim-alt'), bold('Senza Area Personale: '),
     'compila il modulo cartaceo in biglietteria o in un MyLink Point, oppure manda via PEC a ', pec,
-    ' o per posta a Trenord S.r.l. – Ufficio Rimborsi, Piazzale Cadorna 14 – 20121 Milano il ', paper, ' compilato, allegando copia del documento d’identità.');
-  box.append(h, steps, help, offline);
+    ' o per posta a Trenord S.r.l. – Ufficio Rimborsi, Piazzale Cadorna 14 – 20121 Milano il ', paper, ' compilato, allegando copia del documento d’identità.'));
   if (ctx.passType === 'ivol') {
     const declare = el('a', 'apposito form online');
     declare.href = DECLARE_URL;
@@ -306,11 +354,7 @@ function claimBlock(report, ctx, body) {
     box.append(add(el('p', undefined, 'claim-alt'), bold('IVOL comprato da un altro operatore? '),
       'Per avere l’indennizzo dovevi dichiarare la direttrice che usi di più entro il giorno 5 del mese di utilizzo, tramite l’', declare, '.'));
   }
-  const info = el('a', 'pagina ufficiale Trenord sull’indennizzo per ritardi');
-  info.href = INFO_URL;
-  newTab(info);
-  box.append(add(el('p', undefined, 'claim-alt'), 'Fa fede la ', info, '.'));
-  body.append(box);
+  return box;
 }
 
 function noBlock(report, body) {
@@ -331,12 +375,17 @@ function noBlock(report, body) {
   } else {
     body.append(el('p', 'Per l’indennizzo serve almeno il 10% di treni soppressi o in ritardo oltre 15 minuti.', 'near'));
   }
-  const change = el('button', 'Cambia linea', 'linkish');
-  change.type = 'button';
-  change.addEventListener('click', () => focusLine());
-  body.append(add(el('ul', undefined, 'tips'),
-    el('li', 'Il prossimo elenco esce entro fine mese: ricontrolla qui.'),
-    add(el('li', 'Viaggi anche su un’altra linea? '), change)));
+}
+
+function noSteps(body) {
+  const again = el('button', 'Rifai i 3 passi', 'linkish');
+  again.type = 'button';
+  again.addEventListener('click', () => goTo('1'));
+  body.append(nowSteps([
+    [bold('Per ora non c’è niente da chiedere.'), 'Nessun mese degli ultimi 12 è ancora richiedibile per questa scelta.'],
+    [bold('Ricontrolla quando esce il prossimo elenco.'), 'Di solito esce entro fine mese: le tue risposte restano salvate in questo browser.'],
+    [bold('Usi un’altra linea o un altro abbonamento?'), again],
+  ]));
 }
 
 function excludedBlock(body) {
@@ -404,33 +453,39 @@ function table(report) {
   return details;
 }
 
+function moreDetails(...children) {
+  const d = el('details', undefined, 'details');
+  d.append(el('summary', 'Altri dettagli'), ...children);
+  return d;
+}
+
 function ticket(report, ctx) {
   const yes = report.claimable > 0 && !report.pass.excluded;
   const card = el('article', undefined, `ticket ${yes ? 'is-yes' : 'is-no'}`);
   const perf = el('div', undefined, 'perf');
   perf.setAttribute('aria-hidden', 'true');
   const body = el('div', undefined, 'ticket-body');
+  const extras = [];
   if (report.pass.excluded) {
     excludedBlock(body);
   } else if (!report.payable && report.open > 0) {
     amountBlock(report, ctx, body);
+    noSteps(body);
   } else if (yes) {
     amountBlock(report, ctx, body);
     const deadline = deadlineBlock(report);
     if (deadline) body.append(deadline);
     claimBlock(report, ctx, body);
+    extras.push(claimExtras(report, ctx));
   } else {
     noBlock(report, body);
+    noSteps(body);
   }
-  if (!report.pass.excluded) body.append(monthsGrid(report), table(report));
+  body.append(helpBox());
+  if (!report.pass.excluded) body.append(moreDetails(...extras, monthsGrid(report), table(report)));
+  body.append(source(yes));
   card.append(ticketHead(report, ctx, yes), perf, body);
   return card;
-}
-
-function placeholder() {
-  const box = el('div', undefined, 'state');
-  box.append(el('h2', 'Il tuo risultato apparirà qui'), el('p', 'Scegli stazione o linea per vedere il risultato.'));
-  return box;
 }
 
 function skeleton() {
@@ -459,22 +514,10 @@ function render() {
   const lineCode = $('line').value;
   const passType = $('pass').value;
   if (!data) return;
-  if (!lineCode && PASS_TYPES[passType].scope !== 'network') {
-    lastKey = '';
-    return out.replaceChildren(placeholder());
-  }
-  const price = Number($('price').value);
+  const price = parsePrice($('price').value) || 0;
   const report = buildReport({ data, lineCode, passType, price, today: new Date() });
   const line = PASS_TYPES[passType].scope === 'network' ? null : LINES.find((l) => l.code === lineCode);
-  const card = ticket(report, { line, passType, price });
-  const key = `${lineCode}|${passType}`;
-  if (key !== lastKey) card.classList.add('is-new');
-  lastKey = key;
-  out.replaceChildren(card);
-  if (scrollAfterRender && window.matchMedia('(max-width: 1024px)').matches) {
-    out.scrollIntoView({ block: 'start', behavior: reducedMotion() ? 'auto' : 'smooth' });
-  }
-  scrollAfterRender = false;
+  out.replaceChildren(ticket(report, { line, passType, price }));
 }
 
 function fillUpdated() {
@@ -497,31 +540,102 @@ async function load() {
     data = await res.json();
     out.removeAttribute('aria-busy');
     fillUpdated();
-    render();
+    if (step === 'result') render();
   } catch {
     out.removeAttribute('aria-busy');
     out.replaceChildren(failure());
   }
 }
 
+const state = () => ({ line: $('line').value, passType: $('pass').value, price: $('price').value });
+
+function showStep() {
+  const result = step === 'result';
+  $('check').hidden = result;
+  $('result-wrap').hidden = !result;
+  document.querySelector('.wiz-main').classList.toggle('in-flow', step !== '1');
+  if (result) return;
+  document.querySelectorAll('.wstep').forEach((s) => { s.hidden = s.dataset.step !== step; });
+  const n = Number.parseInt(step, 10);
+  const total = lastStep($('pass').value);
+  $('progress-label').textContent = `Passo ${n} di ${STEPS}`;
+  document.querySelectorAll('.progress-bar i').forEach((bar, i) => { bar.className = i + 1 < n ? 'done' : i + 1 === n ? 'on' : ''; });
+  $('back').disabled = step === '1';
+  $('next').textContent = n === total ? 'Vedi il risultato →' : 'Avanti →';
+  const annual = $('pass').value === 'annuale';
+  $('price-lede').textContent = `Scrivi il prezzo del tuo abbonamento ${annual ? 'annuale' : 'mensile'}, in euro.`;
+  $('price-tiny').hidden = annual;
+  $('step-error').textContent = '';
+}
+
+function goTo(next) {
+  step = next;
+  showStep();
+  if (step === 'result') {
+    render();
+    $('result').focus({ preventScroll: true });
+  } else {
+    document.querySelector(`.wstep[data-step="${step}"] .q`).focus({ preventScroll: true });
+  }
+  window.scrollTo({ top: 0, behavior: reducedMotion() ? 'auto' : 'smooth' });
+}
+
+function forward() {
+  if (step === '1') {
+    const choice = $('station').value.trim() && !$('line-more').open ? pickStation($('station').value.trim()) : null;
+    if (choice?.choose) {
+      lineCards(choice.choose);
+      return goTo('1b');
+    }
+  }
+  const n = Number.parseInt(step, 10);
+  const error = stepError(n, state());
+  if (error) {
+    $('step-error').textContent = error;
+    (n === 3 ? $('price') : $('station')).focus();
+    return;
+  }
+  save();
+  if (n >= lastStep($('pass').value)) return goTo('result');
+  goTo(String(n + 1));
+}
+
+function backward() {
+  if (step === '2') return goTo(linesForStation($('station').value).length > 1 ? '1b' : '1');
+  if (step === '1b') return goTo('1');
+  goTo(String(Number.parseInt(step, 10) - 1));
+}
+
 function start() {
   fillSelects();
   restore();
   syncPassKind();
-  $('station').addEventListener('input', () => { showSuggestions(); save(); });
+  showLine();
+  const codes = linesForStation($('station').value);
+  if (codes.length > 1) lineCards(codes);
+  $('station').addEventListener('input', () => {
+    showSuggestions();
+    const codes = linesForStation($('station').value);
+    if (!codes.includes($('line').value)) $('line').value = '';
+    showLine();
+    save();
+  });
   $('station').addEventListener('keydown', suggestionKeys);
   $('station-results').addEventListener('keydown', suggestionKeys);
-  document.querySelector('[data-focus="line"]').addEventListener('click', focusLine);
-  $('line').addEventListener('input', () => { save(); render(); });
-  $('pass').addEventListener('input', () => { syncPassKind(); save(); render(); });
-  $('price').addEventListener('input', () => { save(); render(); });
+  $('line').addEventListener('input', () => { showLine(); save(); });
+  $('pass').addEventListener('input', () => { syncPassKind(); save(); showStep(); });
+  $('price').addEventListener('input', () => { $('step-error').textContent = ''; save(); });
   document.querySelectorAll('input[name="pass-kind"]').forEach((radio) => radio.addEventListener('change', () => {
     if (!radio.checked) return;
     $('pass').value = passFromChoice(radio.value, $('pass').value);
     save();
-    render();
+    showStep();
   }));
-  $('check').addEventListener('submit', (e) => e.preventDefault());
+  $('check').addEventListener('submit', (e) => { e.preventDefault(); forward(); });
+  $('back').addEventListener('click', backward);
+  $('edit').addEventListener('click', () => goTo('1'));
+  step = loadPrefs(storage) && isComplete(state()) ? 'result' : '1';
+  showStep();
   load();
 }
 

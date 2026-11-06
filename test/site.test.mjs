@@ -19,10 +19,28 @@ test('the FAQ explains threshold versus refund', () => {
   assert.match(read('regole/index.html'), /La soglia è il 10%.*Il 30% è il rimborso/s);
 });
 
-test('email alerts are only a disabled placeholder', () => {
+test('the home page collects no email address', () => {
+  assert.doesNotMatch(read('index.html'), /type="email"/);
+});
+
+test('the home page is a 3-step guided check with big back/next buttons and help always at hand', () => {
   const html = read('index.html');
-  assert.match(html, /<button type="button" disabled>Presto disponibile<\/button>/);
-  assert.doesNotMatch(html, /type="email"/);
+  assert.match(html, /Passo 1 di 3/);
+  for (const step of ['1', '1b', '2', '3']) assert.match(html, new RegExp(`class="wstep" data-step="${step}"`), step);
+  assert.match(html, /Da quale stazione parti\?/);
+  assert.match(html, /Quale linea usi\?/);
+  assert.match(html, /Che abbonamento hai\?/);
+  assert.match(html, /Quanto lo paghi\?/);
+  assert.match(html, /id="back" class="btn btn-back"/);
+  assert.match(html, /id="next" class="btn btn-next"/);
+  assert.match(html, /Hai bisogno di aiuto\? Scrivici a <a href="mailto:info@iltrenotideve.eu">/);
+  const css = read('style.css');
+  assert.match(css, /\.wiz \.btn[^{]*\{[^}]*min-height:56px/);
+  assert.match(css, /\.wiz\{[^}]*font-size:1\.125rem/);
+  const js = read('js/app.mjs');
+  assert.match(js, /Vedi il risultato →/);
+  assert.match(js, /'Hai bisogno di aiuto\? Scrivici'/);
+  assert.match(js, /'Altri dettagli'/);
 });
 
 test('the check page stays light: no third-party scripts and small assets', () => {
@@ -84,9 +102,9 @@ test('pass picker: Mensile and Annuale buttons, the rest under "altro"', () => {
   const html = read('index.html');
   assert.match(html, /<input type="radio" name="pass-kind" value="mensile" checked>/);
   assert.match(html, /<input type="radio" name="pass-kind" value="annuale">/);
-  assert.match(html, /<details class="more"[^>]*>\s*<summary>[^<]*altro/);
+  assert.match(html, /<details class="more"[^>]*>\s*<summary>Altro tipo/);
   assert.match(html, /<label for="pass">/);
-  for (const id of ['station', 'line', 'pass', 'price']) assert.match(html, new RegExp(`<label for="${id}">`), id);
+  for (const id of ['station', 'line', 'pass', 'price']) assert.match(html, new RegExp(`<label for="${id}"[ >]`), id);
 });
 
 test('the current page is marked in the navigation and the CTA keeps the official form URL', () => {
@@ -114,7 +132,7 @@ test('the login button is never called a form ("modulo")', () => {
 
 test('the result explains how to claim, with official times, alternatives and source', () => {
   const app = read('js/app.mjs');
-  for (const needle of ['Come richiederlo', 'Tieni pronti questi dati', 'compilare il form online dedicato, selezionando la tessera e l’abbonamento',
+  for (const needle of ['Cosa fare adesso', 'Ti serve: il numero della tua tessera Trenord', 'compilare il form online dedicato, selezionando la tessera e l’abbonamento',
     'entro 30 giorni', 'trenord.it e malpensaexpress.it entro 12 mesi', 'convertirlo in denaro', '02-72494949', 'MyLink Point',
     'rimborsi@pec.trenord.it', 'entro il giorno 5', 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/']) {
     assert.ok(app.includes(needle), needle);
@@ -206,8 +224,8 @@ test('the total is an upper bound conditional on a pass in each month, and the r
   const js = read('js/app.mjs');
   assert.doesNotMatch(js, /Ti spettano circa/);
   assert.match(js, /'Fino a circa'/);
-  assert.match(js, /Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi/);
-  assert.match(js, /Arriva come voucher Trenord, non in denaro/);
+  assert.match(js, /Ti spetta se avevi un abbonamento valido per questa linea in ciascuno di questi mesi/);
+  assert.match(js, /Arriva come voucher Trenord \(un buono\), non in denaro/);
 });
 
 test('below 4 € the verdict is never yes', () => {
