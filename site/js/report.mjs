@@ -52,7 +52,7 @@ export function claimDetails(report, { line, passType, price }) {
   const items = [
     ['Abbonamento', priced ? `${pass.label}, ${euro(price)}` : pass.label],
     ['Direttrice', line ? `Dir. ${line.code} – ${line.name}` : 'Intera rete (IVOL)'],
-    ['Mesi da indicare', months.join(', ')],
+    ['Mesi indennizzabili', months.join(', ')],
   ];
   return { items, months, text: items.map(([k, v]) => `${k}: ${v}`).join('\n') };
 }

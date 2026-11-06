@@ -37,7 +37,7 @@ test('claim details list pass, line and the claimable months oldest first, ready
   const line = { code: '07', name: 'Lecco–Sondrio–Tirano' };
   const r = buildReport({ data, lineCode: '07', passType: 'mensile', price: 61, today });
   const d = claimDetails(r, { line, passType: 'mensile', price: 61 });
-  assert.deepEqual(d.items.map(([k]) => k), ['Abbonamento', 'Direttrice', 'Mesi da indicare']);
+  assert.deepEqual(d.items.map(([k]) => k), ['Abbonamento', 'Direttrice', 'Mesi indennizzabili']);
   assert.match(d.items[0][1], /^Abbonamento mensile Trenord, 61,00\s€$/);
   assert.equal(d.items[1][1], 'Dir. 07 – Lecco–Sondrio–Tirano');
   const months = d.items[2][1].split(', ');

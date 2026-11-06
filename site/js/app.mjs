@@ -6,6 +6,8 @@ import { MAIN_PASSES, OTHER_PASSES, browserStorage, loadPrefs, passChoice, passF
 import { PASS_SHORT, barWidth, deadlineInfo, monthParts, percent, tileState, worstMonth } from './view.mjs';
 
 const CLAIM_URL = 'https://www.trenord.it/store/#/it/auth/login';
+const FORM_URL = 'https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Reclami/M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
+const DECLARE_URL = 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/';
 const INFO_URL = 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const $ = (id) => document.getElementById(id);
@@ -179,6 +181,9 @@ function ticketHead(report, ctx, yes) {
   } else if (!report.payable && report.open > 0) {
     title = 'Sotto i 4 €: niente indennizzo';
     sub = `La linea ha superato la soglia in ${mesi(report.open)}, ma l’importo è sotto il minimo`;
+  } else if (yes && ctx.passType === 'ivol') {
+    title = 'Sì, se l’IVOL è di Trenord o hai dichiarato la direttrice';
+    sub = `${mesi(report.claimable)} ancora da richiedere negli ultimi 12. IVOL di altri operatori: serve la dichiarazione della direttrice entro il 5 del mese`;
   } else if (yes) {
     sub = `${mesi(report.claimable)} ancora da richiedere negli ultimi 12`;
   } else if (report.rows.some((r) => r.qualifies)) {
@@ -264,7 +269,7 @@ function claimBlock(report, ctx, body) {
   const list = el('dl', undefined, 'claim-data');
   list.append(el('dt', 'Tessera'), el('dd', 'Il numero della tua tessera Trenord'));
   details.items.forEach(([k, v]) => {
-    const dd = k === 'Mesi da indicare' ? add(el('dd'), add(el('ul'), ...details.months.map((m) => el('li', m)))) : el('dd', v);
+    const dd = k === 'Mesi indennizzabili' ? add(el('dd'), add(el('ul'), ...details.months.map((m) => el('li', m)))) : el('dd', v);
     list.append(el('dt', k), dd);
   });
   const ready = add(el('li'), bold('Tieni pronti questi dati.'), list);
@@ -275,9 +280,10 @@ function claimBlock(report, ctx, body) {
   const arrow = el('span', '→', 'arrow');
   arrow.setAttribute('aria-hidden', 'true');
   cta.append(arrow);
-  const login = add(el('li'), bold('Accedi all’Area Personale'), ' su trenord.it con l’account a cui è associata la tessera.', add(el('p'), cta));
+  const login = add(el('li'), bold('Accedi all’Area Personale'), ' su trenord.it.', add(el('p'), cta));
   const form = add(el('li'), bold('Compila il form online dedicato.'),
-    ' Trenord dice di «accedere alla tua Area Personale e compilare il form online dedicato, selezionando la tessera e l’abbonamento per cui inoltrare la tua domanda». Ripeti la richiesta per ogni mese.');
+    ' Trenord dice di «accedere alla tua Area Personale e compilare il form online dedicato, selezionando la tessera e l’abbonamento per cui inoltrare la tua domanda».');
+  if (ctx.passType === 'annuale') form.append(' Per l’annuale Trenord suggerisce di chiedere mese per mese.');
   const after = add(el('li'), bold('Ricevi il voucher.'),
     ' Arriva entro 30 giorni dalla richiesta. Lo usi su trenord.it e malpensaexpress.it entro 12 mesi dall’emissione, ed entro 12 mesi puoi chiedere di convertirlo in denaro.');
   const steps = add(el('ol', undefined, 'claim-steps'), ready, login, form, after);
@@ -285,12 +291,20 @@ function claimBlock(report, ctx, body) {
   phone.href = 'tel:+390272494949';
   const pec = el('a', 'rimborsi@pec.trenord.it');
   pec.href = 'mailto:rimborsi@pec.trenord.it';
-  const alt = add(el('p', undefined, 'claim-alt'), bold('Non riesci online? '), 'Chiama l’assistenza al ', phone,
-    ' (tutti i giorni dalle 6 a mezzanotte), vai in biglietteria o in un MyLink Point, oppure manda il modulo cartaceo via PEC a ', pec,
-    ' o per posta.');
-  box.append(h, steps, alt);
+  const paper = el('a', 'modulo Trenord');
+  paper.href = FORM_URL;
+  newTab(paper);
+  const help = add(el('p', undefined, 'claim-alt'), bold('Ti serve aiuto? '), 'Chiama l’assistenza al ', phone, ' (tutti i giorni dalle 6 a mezzanotte).');
+  const offline = add(el('p', undefined, 'claim-alt'), bold('Senza Area Personale: '),
+    'compila il modulo cartaceo in biglietteria o in un MyLink Point, oppure manda via PEC a ', pec,
+    ' o per posta a Trenord S.r.l. – Ufficio Rimborsi, Piazzale Cadorna 14 – 20121 Milano il ', paper, ' compilato, allegando copia del documento d’identità.');
+  box.append(h, steps, help, offline);
   if (ctx.passType === 'ivol') {
-    box.append(el('p', 'IVOL comprato da un altro operatore? Per avere l’indennizzo devi dichiarare la direttrice che usi di più entro il giorno 5 di ogni mese di utilizzo.', 'claim-alt'));
+    const declare = el('a', 'apposito form online');
+    declare.href = DECLARE_URL;
+    newTab(declare);
+    box.append(add(el('p', undefined, 'claim-alt'), bold('IVOL comprato da un altro operatore? '),
+      'Per avere l’indennizzo dovevi dichiarare la direttrice che usi di più entro il giorno 5 del mese di utilizzo, tramite l’', declare, '.'));
   }
   const info = el('a', 'pagina ufficiale Trenord sull’indennizzo per ritardi');
   info.href = INFO_URL;

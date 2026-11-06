@@ -265,3 +265,35 @@ test('every page links the contact address and says it is not a Trenord channel'
   assert.match(main, /mailto:info@iltrenotideve\.eu/);
   assert.match(main, /Non è un canale Trenord: per le richieste di indennizzo/);
 });
+
+test('PEC and post need the Trenord form and an ID copy, with the postal address', () => {
+  const form = 'M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
+  for (const text of [read('js/app.mjs'), read('come-richiedere/index.html')]) {
+    assert.ok(text.includes(form));
+    assert.ok(text.includes('allegando copia del documento d’identità'));
+    assert.ok(text.includes('Piazzale Cadorna 14 – 20121 Milano'));
+  }
+});
+
+test('claim copy never states mechanics Trenord does not describe', () => {
+  for (const text of [read('js/app.mjs'), read('js/report.mjs'), read('come-richiedere/index.html')]) {
+    assert.doesNotMatch(text, /Ripeti|per ogni mese|Mesi da indicare|mesi da indicare/);
+  }
+  assert.match(read('come-richiedere/index.html'), /Per l’annuale Trenord suggerisce di chiedere mese per mese/);
+});
+
+test('static deadline copy gives annual IVOL and TrenoCittà the publication rule', () => {
+  for (const page of ['regole/index.html', 'come-richiedere/index.html']) {
+    const html = read(page);
+    assert.doesNotMatch(html, /Mensile, IVOL e TrenoCittà|per il mensile, IVOL e TrenoCittà/, page);
+    assert.match(html, /mensili \(anche IVOL e TrenoCittà\)/, page);
+    assert.match(html, /annuali \(anche IVOL e TrenoCittà\)/i, page);
+  }
+});
+
+test('IVOL yes is conditioned on the day-5 declaration and links the official form', () => {
+  const app = read('js/app.mjs');
+  assert.match(app, /Sì, se l’IVOL è di Trenord o hai dichiarato la direttrice/);
+  assert.ok(app.includes('https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/'));
+  assert.ok(read('come-richiedere/index.html').includes('dichiarazione-utilizzo-abbonamento-integrato/'));
+});
