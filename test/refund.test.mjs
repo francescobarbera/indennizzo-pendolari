@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { estimateRefund, claimDeadline, addMonths, isExpired, PASS_TYPES } from '../site/js/refund.mjs';
+import { estimateRefund, claimDeadline, addMonths, isExpired, PASS_TYPES, endOfMonth, addYear } from '../site/js/refund.mjs';
 
 test('monthly pass refund is 30% of the price', () => {
   assert.deepEqual(estimateRefund('mensile', 61), { status: 'amount', amount: 18.3 });
@@ -24,12 +24,32 @@ test('excluded and integrated passes are flagged, missing price asks for it', ()
   assert.throws(() => estimateRefund('boh', 1));
 });
 
-test('deadlines: monthly 12 months after the month, annual conservative from publication, stated wins', () => {
+test('deadlines: monthly 12 months after the end of the month, annual 12 months from publication, stated wins', () => {
   assert.equal(addMonths('2025-11', 2), '2026-01');
-  assert.equal(claimDeadline('2026-03', 'mensile', null), '2027-03');
-  assert.equal(claimDeadline('2026-03', 'annuale', null), '2027-05');
-  assert.equal(claimDeadline('2025-10', 'annuale', null), '2026-12');
-  assert.equal(claimDeadline('2024-07', 'mensile', '2026-10'), '2026-10');
-  assert.equal(isExpired('2026-10', new Date('2026-11-05')), true);
-  assert.equal(isExpired('2026-11', new Date('2026-11-05')), false);
+  assert.equal(claimDeadline('2026-03', 'mensile', null), '2027-03-31');
+  assert.equal(claimDeadline('2024-07', 'mensile', '2026-10'), '2026-10-31');
+  assert.equal(claimDeadline('2025-10', 'annuale', '2026-10', '2025-12-19'), '2026-10-31');
+  assert.equal(isExpired('2026-11-04', new Date(2026, 10, 5)), true);
+  assert.equal(isExpired('2026-11-05', new Date(2026, 10, 5)), false);
+});
+
+test('IVOL and TrenoCittà follow the monthly rule: January 2026 IVOL expires at the end of January 2027', () => {
+  assert.equal(claimDeadline('2026-01', 'ivol', null), '2027-01-31');
+  assert.equal(claimDeadline('2026-01', 'trenocitta', null), '2027-01-31');
+  assert.equal(claimDeadline('2026-02', 'ivol', null), '2027-02-28');
+});
+
+test('annual: 12 months from the PDF publication date (October 2025 published 19/12/2025 expires 19/12/2026)', () => {
+  assert.equal(claimDeadline('2025-10', 'annuale', null, '2025-12-19'), '2026-12-19');
+  assert.equal(claimDeadline('2023-12', 'annuale', null, '2024-02-29'), '2025-02-28');
+});
+
+test('annual without a publication date uses the earlier end of M+12, never a later date', () => {
+  assert.equal(claimDeadline('2025-10', 'annuale', null), '2026-10-31');
+  assert.ok(claimDeadline('2025-10', 'annuale', null) < claimDeadline('2025-10', 'annuale', null, '2025-11-01'));
+});
+
+test('date helpers', () => {
+  assert.equal(endOfMonth('2028-02'), '2028-02-29');
+  assert.equal(addYear('2025-12-19'), '2026-12-19');
 });

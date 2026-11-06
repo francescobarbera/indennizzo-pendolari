@@ -182,10 +182,10 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-
 .m.yes .v{color:var(--sun-ink)}
 .m.yes::before{content:"";position:absolute;top:8px;right:8px;width:12px;height:12px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 2px var(--sun-ink)}
 /* expired months: small and greyed out, still listed */
-.m.expired{background:repeating-linear-gradient(135deg,var(--surface) 0 6px,var(--no-bg) 6px 12px);color:var(--muted);min-height:4.5rem}
-.m.expired .mo{font-size:.6875rem}
-.m.expired .v{color:var(--muted);font-size:var(--fs-xs);font-weight:600}
-.m.expired .bar{opacity:.55}
+.m.expired,.m.below{background:repeating-linear-gradient(135deg,var(--surface) 0 6px,var(--no-bg) 6px 12px);color:var(--muted);min-height:4.5rem}
+.m.expired .mo,.m.below .mo{font-size:.6875rem}
+.m.expired .v,.m.below .v{color:var(--muted);font-size:var(--fs-xs);font-weight:600}
+.m.expired .bar,.m.below .bar{opacity:.55}
 .nd{font-size:var(--fs-xs);color:var(--muted);margin:var(--s-2) 0 0}
 details.detail{margin-top:var(--s-4);border-top:1px solid var(--line);padding-top:var(--s-2)}
 details.detail summary{cursor:pointer;font-weight:650;color:var(--brand);min-height:44px;display:flex;align-items:center}

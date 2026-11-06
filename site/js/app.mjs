@@ -1,7 +1,7 @@
 import { LINES } from './lines.mjs';
 import { PASS_TYPES } from './refund.mjs';
 import { normalize, searchStations } from './stations.mjs';
-import { buildReport, euro, monthLabel } from './report.mjs';
+import { buildReport, dateLabel, euro, monthLabel } from './report.mjs';
 import { MAIN_PASSES, OTHER_PASSES, browserStorage, loadPrefs, passChoice, passFromChoice, savePrefs } from './prefs.mjs';
 import { PASS_SHORT, barWidth, deadlineInfo, monthParts, percent, tileState, worstMonth } from './view.mjs';
 
@@ -175,6 +175,9 @@ function ticketHead(report, ctx, yes) {
   if (report.pass.excluded) {
     title = 'Questo abbonamento è escluso';
     sub = 'Non dà diritto all’indennizzo per ritardi';
+  } else if (!report.payable && report.open > 0) {
+    title = 'Sotto i 4 €: niente indennizzo';
+    sub = `La linea ha superato la soglia in ${mesi(report.open)}, ma l’importo è sotto il minimo`;
   } else if (yes) {
     sub = `${mesi(report.claimable)} ancora da richiedere negli ultimi 12`;
   } else if (report.rows.some((r) => r.qualifies)) {
@@ -190,12 +193,14 @@ function ticketHead(report, ctx, yes) {
 function amountBlock(report, ctx, body) {
   const { refund, pass } = report;
   if (refund.status === 'amount') {
-    body.append(el('p', 'Ti spettano circa', 'amount-label'));
+    body.append(el('p', 'Fino a circa', 'amount-label'));
     const amount = el('p', report.total.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 'amount');
     amount.append(el('small', ' €'));
     body.append(amount);
     const base = pass.monthsCovered === 12 ? `30% di 1/12 di ${plainEuro(ctx.price)}` : `30% di ${plainEuro(ctx.price)}`;
     body.append(add(el('p', undefined, 'calc'), bold(mesi(report.claimable)), ' × ', bold(euro(refund.amount)), ` (${base})`));
+    body.append(el('p', 'Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi, a questo prezzo.', 'calc condition'));
+    body.append(el('p', 'Arriva come voucher Trenord, non in denaro: puoi chiedere di convertirlo in denaro entro 12 mesi dall’emissione.', 'calc voucher'));
   } else if (refund.status === 'below-min') {
     body.append(add(el('div', undefined, 'note-box'), el('p', `L’importo (${euro(refund.amount)}) è sotto i 4 €: non viene erogato.`)));
   } else if (refund.status === 'integrated') {
@@ -215,16 +220,16 @@ function deadlineBlock(report) {
   const box = el('div', undefined, info.urgent ? 'deadline' : 'deadline calm');
   box.setAttribute('role', 'note');
   const p = el('p');
-  const when = monthLabel(info.row.deadline);
+  const when = dateLabel(info.row.deadline);
   if (info.urgent) {
     const left = info.days === 0 ? 'Scade oggi' : info.days === 1 ? 'Manca 1 giorno' : `Mancano ${info.days} giorni`;
-    p.append(bold(left), el('br'), `Il mese di ${monthLabel(info.row.month)} scade a fine ${when}.`);
+    p.append(bold(left), el('br'), `Il mese di ${monthLabel(info.row.month)} va chiesto entro il ${when}.`);
   } else {
-    p.append(bold(`Hai tempo fino a fine ${when}`), el('br'), `per il mese di ${monthLabel(info.row.month)}.`);
+    p.append(bold(`Hai tempo fino al ${when}`), el('br'), `per il mese di ${monthLabel(info.row.month)}.`);
   }
-  if (info.others === 1) p.append(` L’altro mese scade a fine ${monthLabel(info.otherFrom)}.`);
-  else if (info.others > 1 && info.otherFrom === info.otherTo) p.append(` Gli altri ${info.others} mesi scadono a fine ${monthLabel(info.otherFrom)}.`);
-  else if (info.others > 1) p.append(` Gli altri ${info.others} mesi scadono tra ${monthLabel(info.otherFrom)} e ${monthLabel(info.otherTo)}.`);
+  if (info.others === 1) p.append(` L’altro mese scade il ${dateLabel(info.otherFrom)}.`);
+  else if (info.others > 1 && info.otherFrom === info.otherTo) p.append(` Gli altri ${info.others} mesi scadono il ${dateLabel(info.otherFrom)}.`);
+  else if (info.others > 1) p.append(` Gli altri ${info.others} mesi scadono tra il ${dateLabel(info.otherFrom)} e il ${dateLabel(info.otherTo)}.`);
   box.append(clock(), p);
   return box;
 }
@@ -292,8 +297,8 @@ function monthsGrid(report) {
     const tile = el('li', undefined, state === 'no' ? 'm' : `m ${state}`);
     tile.style.setProperty('--i', i);
     const { abbr, year } = monthParts(r.month);
-    const shown = state === 'expired' ? 'Scaduto' : r.index === null ? (r.qualifies ? 'Sì' : 'No') : percent(r.index, 1);
-    const said = `${monthLabel(r.month)}: ${r.qualifies ? 'sì' : 'no'}${state === 'expired' ? ', scaduto' : ''}${r.index === null ? '' : `, indice ${percent(r.index)}`}`;
+    const shown = state === 'expired' ? 'Scaduto' : state === 'below' ? '< 4 €' : r.index === null ? (r.qualifies ? 'Sì' : 'No') : percent(r.index, 1);
+    const said = `${monthLabel(r.month)}: ${r.qualifies ? 'sopra la soglia' : 'no'}${state === 'expired' ? ', scaduto' : ''}${state === 'below' ? ', importo sotto i 4 €' : ''}${r.index === null ? '' : `, indice ${percent(r.index)}`}`;
     const visible = [el('span', abbr, 'mo'), el('span', year, 'yr'), el('span', shown, 'v')];
     if (r.index !== null) {
       const bar = el('span', undefined, 'bar');
@@ -317,11 +322,12 @@ function table(report) {
   t.append(el('thead'), el('tbody'));
   t.tHead.append(head);
   for (const r of report.rows) {
-    const tr = el('tr', undefined, [r.qualifies ? 'yes' : 'no', r.qualifies && r.expired ? 'expired' : ''].join(' ').trim());
+    const state = tileState(r);
+    const tr = el('tr', undefined, { yes: 'yes', no: 'no', expired: 'yes expired', below: 'no expired' }[state]);
     tr.append(el('td', monthLabel(r.month)));
-    tr.append(el('td', r.qualifies ? 'Sì' : 'No'));
+    tr.append(el('td', state === 'below' ? 'Sotto 4 €' : r.qualifies ? 'Sì' : 'No'));
     tr.append(el('td', r.index === null ? 'n.d.' : percent(r.index)));
-    tr.append(el('td', r.qualifies ? `${monthLabel(r.deadline)}${r.expired ? ' (scaduto)' : ''}` : '–'));
+    tr.append(el('td', state === 'yes' || state === 'expired' ? `${dateLabel(r.deadline)}${r.expired ? ' (scaduto)' : ''}` : '–'));
     const src = el('td');
     const a = el('a', 'PDF');
     a.href = r.source;
@@ -344,6 +350,8 @@ function ticket(report, ctx) {
   const body = el('div', undefined, 'ticket-body');
   if (report.pass.excluded) {
     excludedBlock(body);
+  } else if (!report.payable && report.open > 0) {
+    amountBlock(report, ctx, body);
   } else if (yes) {
     amountBlock(report, ctx, body);
     const deadline = deadlineBlock(report);

@@ -170,3 +170,25 @@ test('the site is called "Il treno ti deve" and the old name never shows', () =>
   assert.doesNotMatch(read('js/app.mjs'), /indennizzo pendolari/i);
   assert.doesNotMatch(read('style.css'), /indennizzo pendolari/i);
 });
+
+test('sources: ART 106/2018 on the ART site, DGR XII/2116 for the 30%, Regione versus Trenord annual deadline', () => {
+  const html = read('regole/index.html');
+  assert.doesNotMatch(html, /trenitalia\.com/);
+  assert.match(html, /href="https:\/\/www\.autorita-trasporti\.it\/delibere\/delibera-n-106-2018\/"/);
+  assert.match(html, /DGR XII\/2116 del 25\/03\/2024/);
+  assert.match(html, /Regione Lombardia indica 12 mesi dalla fine di validità anche per l’annuale\. Qui seguiamo la regola di Trenord perché è più restrittiva\./);
+});
+
+test('the total is an upper bound conditional on a pass in each month, and the refund is a voucher', () => {
+  const js = read('js/app.mjs');
+  assert.doesNotMatch(js, /Ti spettano circa/);
+  assert.match(js, /'Fino a circa'/);
+  assert.match(js, /Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi/);
+  assert.match(js, /Arriva come voucher Trenord, non in denaro/);
+});
+
+test('below 4 € the verdict is never yes', () => {
+  const js = read('js/app.mjs');
+  assert.match(js, /Sotto i 4 €: niente indennizzo/);
+  assert.match(js, /const yes = report\.claimable > 0/);
+});
