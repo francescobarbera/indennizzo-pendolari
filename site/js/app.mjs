@@ -229,10 +229,16 @@ function deadlineBlock(report) {
   return box;
 }
 
+function newTab(a) {
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  return a;
+}
+
 function claimBlock(body) {
   const cta = el('a', 'Vai al modulo ufficiale Trenord ', 'cta');
   cta.href = CLAIM_URL;
-  cta.rel = 'noopener';
+  newTab(cta);
   const arrow = el('span', '→', 'arrow');
   arrow.setAttribute('aria-hidden', 'true');
   cta.append(arrow);
@@ -269,6 +275,7 @@ function noBlock(report, body) {
 function excludedBlock(body) {
   const link = el('a', 'Vedi quali abbonamenti sono esclusi');
   link.href = 'regole/';
+  newTab(link);
   body.append(el('p', 'Questo abbonamento è escluso dall’indennizzo.', 'near'), add(el('p'), link));
 }
 
@@ -319,7 +326,7 @@ function table(report) {
     const src = el('td');
     const a = el('a', 'PDF');
     a.href = r.source;
-    a.rel = 'noopener';
+    newTab(a);
     a.setAttribute('aria-label', `PDF ufficiale di ${monthLabel(r.month)}`);
     src.append(a);
     tr.append(src);
