@@ -159,3 +159,14 @@ test('no page links the private repo or claims "no cookies" while choices sit in
   }
   assert.match(read('privacy/index.html'), /localStorage/);
 });
+
+test('the site is called "Il treno ti deve" and the old name never shows', () => {
+  for (const page of PAGES) {
+    const html = read(page);
+    assert.match(html, /<title>[^<]*Il treno ti deve[^<]*<\/title>/, page);
+    assert.match(html, /<a class="brand"[^>]*>(<svg[\s\S]*?<\/svg>)?Il treno ti deve<\/a>/, page);
+    assert.doesNotMatch(html, /indennizzo pendolari/i, page);
+  }
+  assert.doesNotMatch(read('js/app.mjs'), /indennizzo pendolari/i);
+  assert.doesNotMatch(read('style.css'), /indennizzo pendolari/i);
+});
