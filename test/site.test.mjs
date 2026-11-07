@@ -343,7 +343,8 @@ test('IVOL yes is conditioned on the day-5 declaration and links the official fo
 
 test('the first step stays hidden until saved answers have been restored, with a usable fallback', () => {
   const html = read('index.html');
-  assert.match(html, /<form hidden id="check"/);
+  assert.match(read('style.css'), /\.wiz-main:not\(\.ready\) #check\{visibility:hidden\}/);
+  assert.match(read('js/app.mjs'), /classList.add\('ready'\)/);
   assert.match(html, /id="wizard-loading" role="status"/);
   assert.match(html, /<noscript>.*JavaScript.*<\/noscript>/);
   const loading = html.split('id="wizard-loading"')[1].split('</p>')[0];

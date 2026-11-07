@@ -639,6 +639,7 @@ function start() {
   step = loadPrefs(storage) && isComplete(state()) ? 'result' : '1';
   showStep();
   $('wizard-loading').hidden = true;
+  document.querySelector('.wiz-main').classList.add('ready');
   load();
 }
 
