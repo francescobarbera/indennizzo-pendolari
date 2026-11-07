@@ -370,3 +370,7 @@ tr.expired a{color:var(--muted)}
 .source{margin:var(--s-4) 0 0;font-size:1rem;color:var(--muted)}
 .claim-months li{margin:2px 0}
 .wiz-main.in-flow .hero-wiz{display:none}
+
+/* Reserve the first card's space while restoring answers, without showing step 1. */
+.wiz-main:not(.ready) #check{visibility:hidden}
+#wizard-loading{position:absolute;max-width:36rem;padding:var(--s-4);z-index:1}

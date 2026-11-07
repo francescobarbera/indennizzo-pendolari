@@ -97,6 +97,7 @@ function showLine() {
   const plain = linePlain($('line').value);
   $('auto-line').hidden = !plain;
   $('auto-line-name').textContent = plain ? plain.full : '';
+  if (plain) $('step-error').textContent = '';
 }
 
 function lineCards(codes) {
@@ -637,6 +638,8 @@ function start() {
   $('edit').addEventListener('click', () => goTo('1'));
   step = loadPrefs(storage) && isComplete(state()) ? 'result' : '1';
   showStep();
+  $('wizard-loading').hidden = true;
+  document.querySelector('.wiz-main').classList.add('ready');
   load();
 }
 
