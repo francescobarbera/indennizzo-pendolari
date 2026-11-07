@@ -1,6 +1,6 @@
 {
   "sourcePage": "https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/",
-  "updatedAt": "2026-11-05T06:31:23.903Z",
+  "updatedAt": "2026-11-06T14:40:46.656Z",
   "months": [
     {
       "month": "2024-07",
@@ -2691,7 +2691,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2025-10-20"
     },
     {
       "month": "2025-08",
@@ -2898,7 +2899,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2025-10-27"
     },
     {
       "month": "2025-09",
@@ -3105,7 +3107,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2025-12-17"
     },
     {
       "month": "2025-10",
@@ -3312,7 +3315,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2025-12-19"
     },
     {
       "month": "2025-11",
@@ -3519,7 +3523,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2026-01-27"
     },
     {
       "month": "2025-12",
@@ -3726,7 +3731,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2026-02-24"
     },
     {
       "month": "2026-01",
@@ -3933,7 +3939,8 @@
         "qualifies": true,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2026-03-31"
     },
     {
       "month": "2026-02",
@@ -4140,7 +4147,8 @@
         "qualifies": false,
         "index": null,
         "deadline": null
-      }
+      },
+      "published": "2026-04-27"
     },
     {
       "month": "2026-03",
@@ -4347,7 +4355,8 @@
         "qualifies": false,
         "index": 5.13,
         "deadline": null
-      }
+      },
+      "published": "2026-05-25"
     },
     {
       "month": "2026-04",
@@ -4554,7 +4563,8 @@
         "qualifies": false,
         "index": 4.66,
         "deadline": null
-      }
+      },
+      "published": "2026-06-29"
     },
     {
       "month": "2026-05",
@@ -4761,7 +4771,8 @@
         "qualifies": false,
         "index": 9.47,
         "deadline": null
-      }
+      },
+      "published": "2026-07-29"
     },
     {
       "month": "2026-06",
@@ -4968,7 +4979,8 @@
         "qualifies": false,
         "index": 9.42,
         "deadline": null
-      }
+      },
+      "published": "2026-08-25"
     },
     {
       "month": "2026-07",
@@ -5175,7 +5187,8 @@
         "qualifies": false,
         "index": 7.29,
         "deadline": null
-      }
+      },
+      "published": "2026-09-29"
     },
     {
       "month": "2026-08",
@@ -5382,7 +5395,8 @@
         "qualifies": false,
         "index": 5.84,
         "deadline": null
-      }
+      },
+      "published": "2026-10-30"
     }
   ]
 }

@@ -1,11 +1,14 @@
 import { LINES } from './lines.mjs';
 import { PASS_TYPES } from './refund.mjs';
 import { normalize, searchStations } from './stations.mjs';
-import { buildReport, euro, monthLabel } from './report.mjs';
+import { buildReport, claimDetails, dateLabel, euro, monthLabel } from './report.mjs';
 import { MAIN_PASSES, OTHER_PASSES, browserStorage, loadPrefs, passChoice, passFromChoice, savePrefs } from './prefs.mjs';
 import { PASS_SHORT, barWidth, deadlineInfo, monthParts, percent, tileState, worstMonth } from './view.mjs';
 
 const CLAIM_URL = 'https://www.trenord.it/store/#/it/auth/login';
+const FORM_URL = 'https://www.trenord.it/fileadmin/contenuti/TRENORD/4-Info_e_assistenza/Informazioni_utili/Reclami/M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
+const DECLARE_URL = 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/';
+const INFO_URL = 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const $ = (id) => document.getElementById(id);
 const el = (tag, text, cls) => {
@@ -175,6 +178,12 @@ function ticketHead(report, ctx, yes) {
   if (report.pass.excluded) {
     title = 'Questo abbonamento è escluso';
     sub = 'Non dà diritto all’indennizzo per ritardi';
+  } else if (!report.payable && report.open > 0) {
+    title = 'Sotto i 4 €: niente indennizzo';
+    sub = `La linea ha superato la soglia in ${mesi(report.open)}, ma l’importo è sotto il minimo`;
+  } else if (yes && ctx.passType === 'ivol') {
+    title = 'Sì, se l’IVOL è di Trenord o hai dichiarato la direttrice';
+    sub = `${mesi(report.claimable)} ancora da richiedere negli ultimi 12. IVOL di altri operatori: serve la dichiarazione della direttrice entro il 5 del mese`;
   } else if (yes) {
     sub = `${mesi(report.claimable)} ancora da richiedere negli ultimi 12`;
   } else if (report.rows.some((r) => r.qualifies)) {
@@ -190,12 +199,14 @@ function ticketHead(report, ctx, yes) {
 function amountBlock(report, ctx, body) {
   const { refund, pass } = report;
   if (refund.status === 'amount') {
-    body.append(el('p', 'Ti spettano circa', 'amount-label'));
+    body.append(el('p', 'Fino a circa', 'amount-label'));
     const amount = el('p', report.total.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 'amount');
     amount.append(el('small', ' €'));
     body.append(amount);
     const base = pass.monthsCovered === 12 ? `30% di 1/12 di ${plainEuro(ctx.price)}` : `30% di ${plainEuro(ctx.price)}`;
     body.append(add(el('p', undefined, 'calc'), bold(mesi(report.claimable)), ' × ', bold(euro(refund.amount)), ` (${base})`));
+    body.append(el('p', 'Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi, a questo prezzo.', 'calc condition'));
+    body.append(el('p', 'Arriva come voucher Trenord, non in denaro: puoi chiedere di convertirlo in denaro entro 12 mesi dall’emissione.', 'calc voucher'));
   } else if (refund.status === 'below-min') {
     body.append(add(el('div', undefined, 'note-box'), el('p', `L’importo (${euro(refund.amount)}) è sotto i 4 €: non viene erogato.`)));
   } else if (refund.status === 'integrated') {
@@ -215,16 +226,16 @@ function deadlineBlock(report) {
   const box = el('div', undefined, info.urgent ? 'deadline' : 'deadline calm');
   box.setAttribute('role', 'note');
   const p = el('p');
-  const when = monthLabel(info.row.deadline);
+  const when = dateLabel(info.row.deadline);
   if (info.urgent) {
     const left = info.days === 0 ? 'Scade oggi' : info.days === 1 ? 'Manca 1 giorno' : `Mancano ${info.days} giorni`;
-    p.append(bold(left), el('br'), `Il mese di ${monthLabel(info.row.month)} scade a fine ${when}.`);
+    p.append(bold(left), el('br'), `Il mese di ${monthLabel(info.row.month)} va chiesto entro il ${when}.`);
   } else {
-    p.append(bold(`Hai tempo fino a fine ${when}`), el('br'), `per il mese di ${monthLabel(info.row.month)}.`);
+    p.append(bold(`Hai tempo fino al ${when}`), el('br'), `per il mese di ${monthLabel(info.row.month)}.`);
   }
-  if (info.others === 1) p.append(` L’altro mese scade a fine ${monthLabel(info.otherFrom)}.`);
-  else if (info.others > 1 && info.otherFrom === info.otherTo) p.append(` Gli altri ${info.others} mesi scadono a fine ${monthLabel(info.otherFrom)}.`);
-  else if (info.others > 1) p.append(` Gli altri ${info.others} mesi scadono tra ${monthLabel(info.otherFrom)} e ${monthLabel(info.otherTo)}.`);
+  if (info.others === 1) p.append(` L’altro mese scade il ${dateLabel(info.otherFrom)}.`);
+  else if (info.others > 1 && info.otherFrom === info.otherTo) p.append(` Gli altri ${info.others} mesi scadono il ${dateLabel(info.otherFrom)}.`);
+  else if (info.others > 1) p.append(` Gli altri ${info.others} mesi scadono tra il ${dateLabel(info.otherFrom)} e il ${dateLabel(info.otherTo)}.`);
   box.append(clock(), p);
   return box;
 }
@@ -235,15 +246,71 @@ function newTab(a) {
   return a;
 }
 
-function claimBlock(body) {
-  const cta = el('a', 'Vai al modulo ufficiale Trenord ', 'cta');
+function copyButton(text) {
+  const button = el('button', 'Copia i dati', 'linkish copy');
+  button.type = 'button';
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = 'Copiati';
+    } catch {
+      button.textContent = 'Non riesco a copiarli: selezionali a mano';
+    }
+  });
+  return button;
+}
+
+function claimBlock(report, ctx, body) {
+  const box = el('section', undefined, 'claim');
+  box.setAttribute('aria-labelledby', 'claim-h');
+  const h = el('h3', 'Come richiederlo');
+  h.id = 'claim-h';
+  const details = claimDetails(report, ctx);
+  const list = el('dl', undefined, 'claim-data');
+  list.append(el('dt', 'Tessera'), el('dd', 'Il numero della tua tessera Trenord'));
+  details.items.forEach(([k, v]) => {
+    const dd = k === 'Mesi indennizzabili' ? add(el('dd'), add(el('ul'), ...details.months.map((m) => el('li', m)))) : el('dd', v);
+    list.append(el('dt', k), dd);
+  });
+  const ready = add(el('li'), bold('Tieni pronti questi dati.'), list);
+  if (navigator.clipboard) ready.append(copyButton(details.text));
+  const cta = el('a', 'Accedi all’Area Personale Trenord ', 'cta');
   cta.href = CLAIM_URL;
   newTab(cta);
   const arrow = el('span', '→', 'arrow');
   arrow.setAttribute('aria-hidden', 'true');
   cta.append(arrow);
-  body.append(add(el('p'), cta));
-  body.append(el('p', 'Si apre l’Area Personale sul sito ufficiale di Trenord. Ripeti la richiesta per ogni mese.', 'cta-note'));
+  const login = add(el('li'), bold('Accedi all’Area Personale'), ' su trenord.it.', add(el('p'), cta));
+  const form = add(el('li'), bold('Compila il form online dedicato.'),
+    ' Trenord dice di «accedere alla tua Area Personale e compilare il form online dedicato, selezionando la tessera e l’abbonamento per cui inoltrare la tua domanda».');
+  if (ctx.passType === 'annuale') form.append(' Per l’annuale Trenord suggerisce di chiedere mese per mese.');
+  const after = add(el('li'), bold('Ricevi il voucher.'),
+    ' Arriva entro 30 giorni dalla richiesta. Lo usi su trenord.it e malpensaexpress.it entro 12 mesi dall’emissione, ed entro 12 mesi puoi chiedere di convertirlo in denaro.');
+  const steps = add(el('ol', undefined, 'claim-steps'), ready, login, form, after);
+  const phone = el('a', '02-72494949');
+  phone.href = 'tel:+390272494949';
+  const pec = el('a', 'rimborsi@pec.trenord.it');
+  pec.href = 'mailto:rimborsi@pec.trenord.it';
+  const paper = el('a', 'modulo Trenord');
+  paper.href = FORM_URL;
+  newTab(paper);
+  const help = add(el('p', undefined, 'claim-alt'), bold('Ti serve aiuto? '), 'Chiama l’assistenza al ', phone, ' (tutti i giorni dalle 6 a mezzanotte).');
+  const offline = add(el('p', undefined, 'claim-alt'), bold('Senza Area Personale: '),
+    'compila il modulo cartaceo in biglietteria o in un MyLink Point, oppure manda via PEC a ', pec,
+    ' o per posta a Trenord S.r.l. – Ufficio Rimborsi, Piazzale Cadorna 14 – 20121 Milano il ', paper, ' compilato, allegando copia del documento d’identità.');
+  box.append(h, steps, help, offline);
+  if (ctx.passType === 'ivol') {
+    const declare = el('a', 'apposito form online');
+    declare.href = DECLARE_URL;
+    newTab(declare);
+    box.append(add(el('p', undefined, 'claim-alt'), bold('IVOL comprato da un altro operatore? '),
+      'Per avere l’indennizzo dovevi dichiarare la direttrice che usi di più entro il giorno 5 del mese di utilizzo, tramite l’', declare, '.'));
+  }
+  const info = el('a', 'pagina ufficiale Trenord sull’indennizzo per ritardi');
+  info.href = INFO_URL;
+  newTab(info);
+  box.append(add(el('p', undefined, 'claim-alt'), 'Fa fede la ', info, '.'));
+  body.append(box);
 }
 
 function noBlock(report, body) {
@@ -292,8 +359,8 @@ function monthsGrid(report) {
     const tile = el('li', undefined, state === 'no' ? 'm' : `m ${state}`);
     tile.style.setProperty('--i', i);
     const { abbr, year } = monthParts(r.month);
-    const shown = state === 'expired' ? 'Scaduto' : r.index === null ? (r.qualifies ? 'Sì' : 'No') : percent(r.index, 1);
-    const said = `${monthLabel(r.month)}: ${r.qualifies ? 'sì' : 'no'}${state === 'expired' ? ', scaduto' : ''}${r.index === null ? '' : `, indice ${percent(r.index)}`}`;
+    const shown = state === 'expired' ? 'Scaduto' : state === 'below' ? '< 4 €' : r.index === null ? (r.qualifies ? 'Sì' : 'No') : percent(r.index, 1);
+    const said = `${monthLabel(r.month)}: ${r.qualifies ? 'sopra la soglia' : 'no'}${state === 'expired' ? ', scaduto' : ''}${state === 'below' ? ', importo sotto i 4 €' : ''}${r.index === null ? '' : `, indice ${percent(r.index)}`}`;
     const visible = [el('span', abbr, 'mo'), el('span', year, 'yr'), el('span', shown, 'v')];
     if (r.index !== null) {
       const bar = el('span', undefined, 'bar');
@@ -317,11 +384,12 @@ function table(report) {
   t.append(el('thead'), el('tbody'));
   t.tHead.append(head);
   for (const r of report.rows) {
-    const tr = el('tr', undefined, [r.qualifies ? 'yes' : 'no', r.qualifies && r.expired ? 'expired' : ''].join(' ').trim());
+    const state = tileState(r);
+    const tr = el('tr', undefined, { yes: 'yes', no: 'no', expired: 'yes expired', below: 'no expired' }[state]);
     tr.append(el('td', monthLabel(r.month)));
-    tr.append(el('td', r.qualifies ? 'Sì' : 'No'));
+    tr.append(el('td', state === 'below' ? 'Sotto 4 €' : r.qualifies ? 'Sì' : 'No'));
     tr.append(el('td', r.index === null ? 'n.d.' : percent(r.index)));
-    tr.append(el('td', r.qualifies ? `${monthLabel(r.deadline)}${r.expired ? ' (scaduto)' : ''}` : '–'));
+    tr.append(el('td', state === 'yes' || state === 'expired' ? `${dateLabel(r.deadline)}${r.expired ? ' (scaduto)' : ''}` : '–'));
     const src = el('td');
     const a = el('a', 'PDF');
     a.href = r.source;
@@ -344,11 +412,13 @@ function ticket(report, ctx) {
   const body = el('div', undefined, 'ticket-body');
   if (report.pass.excluded) {
     excludedBlock(body);
+  } else if (!report.payable && report.open > 0) {
+    amountBlock(report, ctx, body);
   } else if (yes) {
     amountBlock(report, ctx, body);
     const deadline = deadlineBlock(report);
     if (deadline) body.append(deadline);
-    claimBlock(body);
+    claimBlock(report, ctx, body);
   } else {
     noBlock(report, body);
   }

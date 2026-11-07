@@ -23,7 +23,8 @@ export function barWidth(index) {
 
 export function tileState(row) {
   if (!row.qualifies) return 'no';
-  return row.expired ? 'expired' : 'yes';
+  if (row.expired) return 'expired';
+  return row.claimable === false ? 'below' : 'yes';
 }
 
 export function worstMonth(rows) {
@@ -31,15 +32,15 @@ export function worstMonth(rows) {
     .reduce((best, r) => (!best || r.index > best.index ? r : best), null);
 }
 
-// Earliest still-claimable deadline (end of that month) and the days left from today.
+// Earliest still-claimable deadline (a YYYY-MM-DD last day, inclusive) and the days left from today.
 export function deadlineInfo(report, today) {
   if (report.pass.excluded) return null;
-  const open = report.rows.filter((r) => r.qualifies && !r.expired)
+  const open = report.rows.filter((r) => r.qualifies && !r.expired && r.claimable !== false)
     .sort((a, b) => a.deadline.localeCompare(b.deadline));
   if (!open.length) return null;
   const [first, ...others] = open;
-  const [y, m] = first.deadline.split('-').map(Number);
-  const end = Date.UTC(y, m, 0);
+  const [y, m, d] = first.deadline.split('-').map(Number);
+  const end = Date.UTC(y, m - 1, d);
   const start = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
   const days = Math.max(0, Math.round((end - start) / DAY));
   return {

@@ -54,7 +54,10 @@ test('no page or stylesheet loads fonts, styles or scripts from another origin',
   for (const page of PAGES) {
     const html = read(page);
     assert.doesNotMatch(html, /<script[^>]+src="(https?:)?\/\//, page);
-    assert.doesNotMatch(html, /<link[^>]+href="(https?:)?\/\//, page);
+    // rel="canonical" names the page's own address; it loads nothing.
+    for (const link of html.match(/<link[^>]*>/g)) {
+      if (!/rel="canonical"/.test(link)) assert.doesNotMatch(link, /href="(https?:)?\/\//, page);
+    }
     assert.doesNotMatch(html, /fonts\.(googleapis|gstatic)\.com/, page);
     assert.doesNotMatch(html, /<style/, page);
   }
@@ -95,7 +98,27 @@ test('the current page is marked in the navigation and the CTA keeps the officia
   }
   assert.match(read('index.html'), /<a href="" aria-current="page"[^>]*>Verifica<\/a>/);
   assert.match(read('js/app.mjs'), /https:\/\/www\.trenord\.it\/store\/#\/it\/auth\/login/);
-  assert.match(read('js/app.mjs'), /modulo ufficiale Trenord/);
+  assert.match(read('js/app.mjs'), /Accedi all’Area Personale Trenord/);
+});
+
+test('the login button is never called a form ("modulo")', () => {
+  const app = read('js/app.mjs');
+  const label = app.match(/el\('a', '([^']*)', 'cta'\)/);
+  assert.ok(label, 'CTA label found in app.mjs');
+  assert.equal(label[1].trim(), 'Accedi all’Area Personale Trenord');
+  const page = read('come-richiedere/index.html');
+  const ctas = [...page.matchAll(/<a class="cta"[^>]*>([^<]*)</g)].map((m) => m[1].trim());
+  assert.deepEqual(ctas, ['Accedi all’Area Personale Trenord']);
+  for (const text of [label[1], ...ctas]) assert.doesNotMatch(text, /modulo/i);
+});
+
+test('the result explains how to claim, with official times, alternatives and source', () => {
+  const app = read('js/app.mjs');
+  for (const needle of ['Come richiederlo', 'Tieni pronti questi dati', 'compilare il form online dedicato, selezionando la tessera e l’abbonamento',
+    'entro 30 giorni', 'trenord.it e malpensaexpress.it entro 12 mesi', 'convertirlo in denaro', '02-72494949', 'MyLink Point',
+    'rimborsi@pec.trenord.it', 'entro il giorno 5', 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/']) {
+    assert.ok(app.includes(needle), needle);
+  }
 });
 
 test('result rendering writes text, never HTML', () => {
@@ -169,4 +192,108 @@ test('the site is called "Il treno ti deve" and the old name never shows', () =>
   }
   assert.doesNotMatch(read('js/app.mjs'), /indennizzo pendolari/i);
   assert.doesNotMatch(read('style.css'), /indennizzo pendolari/i);
+});
+
+test('sources: ART 106/2018 on the ART site, DGR XII/2116 for the 30%, Regione versus Trenord annual deadline', () => {
+  const html = read('regole/index.html');
+  assert.doesNotMatch(html, /trenitalia\.com/);
+  assert.match(html, /href="https:\/\/www\.autorita-trasporti\.it\/delibere\/delibera-n-106-2018\/"/);
+  assert.match(html, /DGR XII\/2116 del 25\/03\/2024/);
+  assert.match(html, /Regione Lombardia indica 12 mesi dalla fine di validità anche per l’annuale\. Qui seguiamo la regola di Trenord perché è più restrittiva\./);
+});
+
+test('the total is an upper bound conditional on a pass in each month, and the refund is a voucher', () => {
+  const js = read('js/app.mjs');
+  assert.doesNotMatch(js, /Ti spettano circa/);
+  assert.match(js, /'Fino a circa'/);
+  assert.match(js, /Se avevi un abbonamento valido per questa direttrice in ciascuno di questi mesi/);
+  assert.match(js, /Arriva come voucher Trenord, non in denaro/);
+});
+
+test('below 4 € the verdict is never yes', () => {
+  const js = read('js/app.mjs');
+  assert.match(js, /Sotto i 4 €: niente indennizzo/);
+  assert.match(js, /const yes = report\.claimable > 0/);
+});
+
+const PAGE_URLS = { 'index.html': '', 'come-richiedere/index.html': 'come-richiedere/', 'regole/index.html': 'regole/', 'privacy/index.html': 'privacy/' };
+
+test('every page has its canonical URL on iltrenotideve.eu, Open Graph and Twitter card', () => {
+  for (const [page, path] of Object.entries(PAGE_URLS)) {
+    const html = read(page);
+    const url = `https://iltrenotideve.eu/${path}`;
+    const one = (re) => assert.equal((html.match(new RegExp(re, 'g')) ?? []).length, 1, `${page}: ${re}`);
+    one(`<link rel="canonical" href="${url}">`);
+    one(`<meta property="og:url" content="${url}">`);
+    one('<meta property="og:site_name" content="Il treno ti deve">');
+    one('<meta property="og:locale" content="it_IT">');
+    one('<meta property="og:title" content="[^"]+">');
+    one('<meta property="og:description" content="[^"]+">');
+    one('<meta property="og:image" content="https://iltrenotideve.eu/og.png">');
+    one('<meta name="twitter:card" content="summary_large_image">');
+    one('<link rel="apple-touch-icon" href="/apple-touch-icon.png">');
+    one('<link rel="icon" href="/favicon.ico"');
+  }
+});
+
+test('preview image is 1200×630, icons, robots.txt and sitemap.xml exist', () => {
+  const png = readFileSync(new URL('../site/og.png', import.meta.url));
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+  const touch = readFileSync(new URL('../site/apple-touch-icon.png', import.meta.url));
+  assert.equal(touch.readUInt32BE(16), 180);
+  const ico = readFileSync(new URL('../site/favicon.ico', import.meta.url));
+  assert.deepEqual([...ico.subarray(0, 4)], [0, 0, 1, 0]);
+  assert.match(read('robots.txt'), /^Sitemap: https:\/\/iltrenotideve\.eu\/sitemap\.xml$/m);
+  const sitemap = read('sitemap.xml');
+  for (const path of Object.values(PAGE_URLS)) assert.match(sitemap, new RegExp(`<loc>https://iltrenotideve\\.eu/${path}</loc>`));
+});
+
+test('the home page says the refund is a voucher', () => {
+  assert.match(read('index.html'), /voucher/);
+});
+
+
+test('every page links the contact address and says it is not a Trenord channel', () => {
+  for (const page of ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html']) {
+    const html = read(page);
+    assert.match(html, /<footer[\s\S]*<a href="mailto:info@iltrenotideve\.eu">info@iltrenotideve\.eu<\/a>[\s\S]*<\/footer>/, page);
+    assert.match(html, /<footer[\s\S]*Non è un canale Trenord[\s\S]*<\/footer>/, page);
+  }
+  const main = read('privacy/index.html').split('<footer')[0];
+  assert.match(main, /<h2>Contatti<\/h2>/);
+  assert.match(main, /mailto:info@iltrenotideve\.eu/);
+  assert.match(main, /Non è un canale Trenord: per le richieste di indennizzo/);
+});
+
+test('PEC and post need the Trenord form and an ID copy, with the postal address', () => {
+  const form = 'M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
+  for (const text of [read('js/app.mjs'), read('come-richiedere/index.html')]) {
+    assert.ok(text.includes(form));
+    assert.ok(text.includes('allegando copia del documento d’identità'));
+    assert.ok(text.includes('Piazzale Cadorna 14 – 20121 Milano'));
+  }
+});
+
+test('claim copy never states mechanics Trenord does not describe', () => {
+  for (const text of [read('js/app.mjs'), read('js/report.mjs'), read('come-richiedere/index.html')]) {
+    assert.doesNotMatch(text, /Ripeti|per ogni mese|Mesi da indicare|mesi da indicare/);
+  }
+  assert.match(read('come-richiedere/index.html'), /Per l’annuale Trenord suggerisce di chiedere mese per mese/);
+});
+
+test('static deadline copy gives annual IVOL and TrenoCittà the publication rule', () => {
+  for (const page of ['regole/index.html', 'come-richiedere/index.html']) {
+    const html = read(page);
+    assert.doesNotMatch(html, /Mensile, IVOL e TrenoCittà|per il mensile, IVOL e TrenoCittà/, page);
+    assert.match(html, /mensili \(anche IVOL e TrenoCittà\)/, page);
+    assert.match(html, /annuali \(anche IVOL e TrenoCittà\)/i, page);
+  }
+});
+
+test('IVOL yes is conditioned on the day-5 declaration and links the official form', () => {
+  const app = read('js/app.mjs');
+  assert.match(app, /Sì, se l’IVOL è di Trenord o hai dichiarato la direttrice/);
+  assert.ok(app.includes('https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/'));
+  assert.ok(read('come-richiedere/index.html').includes('dichiarazione-utilizzo-abbonamento-integrato/'));
 });

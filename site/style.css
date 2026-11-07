@@ -40,7 +40,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:var(--lh-tight);letter-spac
 .linkish:hover{color:var(--brand-strong)}
 
 /* header */
-.top{position:sticky;top:0;z-index:5;background:rgb(255 248 238 / .92);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
 .top-in{max-width:72rem;margin:0 auto;padding:var(--s-3) var(--s-4);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-2) var(--s-4)}
 .brand{display:inline-flex;align-items:center;gap:var(--s-2);font:800 var(--fs-lg)/1 var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.02em;min-height:44px}
 .brand svg{flex:none}
@@ -55,7 +55,8 @@ main.page{max-width:44rem}
 .hero{position:relative;padding:var(--s-4) 0 var(--s-5)}
 .eyebrow{display:inline-flex;align-items:center;gap:var(--s-2);font-weight:700;font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--sun-ink);background:var(--sun-soft);border:1px solid #F3DC92;padding:var(--s-1) var(--s-3);border-radius:var(--r-pill);margin:0}
 .eyebrow::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--sun-ink)}
-.eyebrow[hidden]{display:none}
+/* keeps its space until the data arrives, so nothing below it moves */
+.eyebrow[hidden]{display:inline-flex;visibility:hidden}
 h1{font-size:var(--fs-2xl);font-weight:800;margin:var(--s-3) 0;max-width:20ch;text-wrap:balance}
 h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--sun) 62% 92%,transparent 92%);padding-inline:.06em;white-space:nowrap}
 .lede{color:var(--muted);font-size:var(--fs-lg);max-width:38rem;margin:0}
@@ -158,6 +159,16 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-
 .cta:hover .arrow,.cta:focus-visible .arrow{transform:translateX(4px)}
 .cta-note{font-size:var(--fs-xs);color:var(--muted);text-align:center;margin:var(--s-2) 0 0}
 @media (min-width:600px){.cta{display:inline-flex;width:auto}.cta-note{text-align:left}}
+.claim{margin:var(--s-5) 0 0;padding:var(--s-4);border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+.claim h3{font-size:var(--fs-lg);font-weight:700;margin:0 0 var(--s-3)}
+.claim-steps{margin:0;padding-left:1.4rem;display:grid;gap:var(--s-3)}
+.claim-steps p{margin:var(--s-2) 0 0}
+.claim-data{margin:var(--s-2) 0;font-size:var(--fs-sm)}
+.claim-data dt{font-size:var(--fs-xs);font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:var(--s-2)}
+.claim-data dd{margin:0;overflow-wrap:anywhere}
+.claim-data ul{margin:0;padding-left:1.1rem}
+.claim .copy{min-height:44px}
+.claim-alt{font-size:var(--fs-sm);color:var(--muted);margin:var(--s-3) 0 0}
 
 /* months grid */
 .months-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s-3);margin:var(--s-5) 0 var(--s-3)}
@@ -182,10 +193,10 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-
 .m.yes .v{color:var(--sun-ink)}
 .m.yes::before{content:"";position:absolute;top:8px;right:8px;width:12px;height:12px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 2px var(--sun-ink)}
 /* expired months: small and greyed out, still listed */
-.m.expired{background:repeating-linear-gradient(135deg,var(--surface) 0 6px,var(--no-bg) 6px 12px);color:var(--muted);min-height:4.5rem}
-.m.expired .mo{font-size:.6875rem}
-.m.expired .v{color:var(--muted);font-size:var(--fs-xs);font-weight:600}
-.m.expired .bar{opacity:.55}
+.m.expired,.m.below{background:repeating-linear-gradient(135deg,var(--surface) 0 6px,var(--no-bg) 6px 12px);color:var(--muted);min-height:4.5rem}
+.m.expired .mo,.m.below .mo{font-size:.6875rem}
+.m.expired .v,.m.below .v{color:var(--muted);font-size:var(--fs-xs);font-weight:600}
+.m.expired .bar,.m.below .bar{opacity:.55}
 .nd{font-size:var(--fs-xs);color:var(--muted);margin:var(--s-2) 0 0}
 details.detail{margin-top:var(--s-4);border-top:1px solid var(--line);padding-top:var(--s-2)}
 details.detail summary{cursor:pointer;font-weight:650;color:var(--brand);min-height:44px;display:flex;align-items:center}

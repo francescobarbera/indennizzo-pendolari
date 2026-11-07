@@ -24,3 +24,14 @@ test('broken data is rejected with a reason', () => {
   }
   assert.deepEqual(validateData({ months: [] }), ['nessun mese nei dati']);
 });
+
+test('the publication date is optional but must be a real date after the month', () => {
+  const data = load('./fixtures/indennizzi-2026-11.json');
+  const m = data.months.find((x) => x.month === '2025-10');
+  m.published = '2025-12-19';
+  assert.deepEqual(validateData(data), []);
+  for (const bad of ['2025-10-20', '2025-12', '19/12/2025', null]) {
+    m.published = bad;
+    assert.ok(validateData(data).some((p) => /2025-10: data di pubblicazione non valida/.test(p)), String(bad));
+  }
+});

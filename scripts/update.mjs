@@ -23,9 +23,12 @@ async function main() {
       fetchText: async (url) => (await fetchOk(url)).text(),
       pdfToText: async (url) => {
         const file = join(work, 'in.pdf');
-        await writeFile(file, Buffer.from(await (await fetchOk(url)).arrayBuffer()));
+        const res = await fetchOk(url);
+        await writeFile(file, Buffer.from(await res.arrayBuffer()));
         const { stdout } = await run('pdftotext', ['-layout', '-enc', 'UTF-8', file, '-']);
-        return stdout;
+        const info = await run('pdfinfo', ['-isodates', file]).then((r) => r.stdout, () => '');
+        const created = info.match(/^CreationDate:\s*(\S+)/m)?.[1]?.replace(/([+-]\d{2})$/, '$1:00');
+        return { text: stdout, dates: [res.headers.get('last-modified'), created].filter(Boolean) };
       },
     });
     const previous = JSON.parse(await readFile(DATA, 'utf8').catch(() => 'null'));

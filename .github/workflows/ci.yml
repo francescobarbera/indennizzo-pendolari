@@ -16,3 +16,21 @@ jobs:
           node-version: 22
       - run: npm test
       - run: npm run build
+
+  lighthouse:
+    # Every page must score 100 in all four categories, on mobile and desktop.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run build
+      - run: npm run lighthouse
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          include-hidden-files: true
+          retention-days: 7

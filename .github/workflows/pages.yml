@@ -36,3 +36,18 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  lighthouse-live:
+    # The deployed site must still score 100 everywhere.
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run lighthouse:live
