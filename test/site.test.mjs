@@ -340,3 +340,28 @@ test('IVOL yes is conditioned on the day-5 declaration and links the official fo
   assert.ok(app.includes('https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/'));
   assert.ok(read('come-richiedere/index.html').includes('dichiarazione-utilizzo-abbonamento-integrato/'));
 });
+
+test('the first step stays hidden until saved answers have been restored, with a usable fallback', () => {
+  const html = read('index.html');
+  assert.match(html, /<form hidden id="check"/);
+  assert.match(html, /id="wizard-loading" role="status"/);
+  assert.match(html, /<noscript>.*JavaScript.*<\/noscript>/);
+  const loading = html.split('id="wizard-loading"')[1].split('</p>')[0];
+  assert.match(loading, /href="regole\/"/);
+  assert.match(loading, /href="come-richiedere\/"/);
+  const start = read('js/app.mjs').split('function start()')[1];
+  assert.ok(start.indexOf('restore();') < start.lastIndexOf('showStep();'));
+  assert.ok(start.indexOf('isComplete(state())') < start.lastIndexOf('showStep();'));
+  assert.ok(start.lastIndexOf('showStep();') < start.indexOf("$('wizard-loading').hidden = true"));
+});
+
+test('a valid line immediately clears the station error on every selection path', () => {
+  const js = read('js/app.mjs');
+  const showLine = js.split('function showLine()')[1].split('\n}')[0];
+  assert.match(showLine, /if \(plain\) \$\('step-error'\)\.textContent = ''/);
+  const pickStation = js.split('function pickStation(')[1].split('\n}')[0];
+  assert.match(pickStation, /showLine\(\)/);
+  const lineCards = js.split('function lineCards(')[1].split('\n}')[0];
+  assert.match(lineCards, /addEventListener\('change'.*showLine\(\)/);
+  assert.match(js, /\$\('line'\)\.addEventListener\('input'.*showLine\(\)/);
+});
