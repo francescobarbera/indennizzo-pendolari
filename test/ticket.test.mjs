@@ -40,7 +40,9 @@ test('YES: amount "fino a circa", the condition, the voucher once, no extra boxe
     'info@iltrenotideve.eu', 'malpensaexpress', 'I tuoi ultimi 12 mesi']) {
     assert.ok(!text.includes(gone), gone);
   }
-  assert.equal(byClass(card, 'cta').length, 0, 'no separate CTA button');
+  const ctas = byClass(card, 'cta');
+  assert.equal(ctas.length, 1, 'only one CTA');
+  assert.ok(byClass(card, 'now-steps')[0].childNodes[0] && byClass(byClass(card, 'now-steps')[0], 'cta').length === 1, 'CTA lives inside «Cosa fare adesso»');
   assert.equal(byTag(card, 'details').length, 0, 'no "Altri dettagli"');
 });
 
@@ -61,10 +63,14 @@ test('YES: «Cosa fare adesso» has the login link in step 1, months with deadli
   assert.equal(login.href, CLAIM_URL);
   assert.equal(login.target, '_blank');
   assert.equal(login.rel, 'noopener noreferrer');
-  assert.equal(squash(login.textContent), 'Accedi all’Area Personale Trenord');
-  assert.equal(squash(visibleText(one)), 'Accedi all’Area Personale Trenord Ti servono email e password Trenord.');
+  assert.equal(squash(login.textContent), 'Accedi all’Area Personale Trenord →');
+  // Primary full-width button, inside step 1, under the sentence; the arrow is decorative.
+  assert.ok(login.className.split(' ').includes('cta') && login.className.split(' ').includes('cta-block'));
+  assert.equal(squash(visibleText(login)), 'Accedi all’Area Personale Trenord');
+  assert.equal(squash(visibleText(one)), 'Ti servono email e password Trenord. Accedi all’Area Personale Trenord');
+  assert.equal(byTag(card, 'a').filter((a) => a.href === CLAIM_URL).length, 1);
 
-  assert.ok(squash(visibleText(two)).startsWith('Compila il modulo con il numero della tessera e questi mesi:'));
+  assert.ok(squash(visibleText(two)).startsWith('Compila il form online con il numero della tessera e questi mesi:'));
   const months = byTag(byClass(two, 'claim-months')[0], 'li').map((li) => li.textContent);
   assert.equal(months.length, 6);
   assert.equal(months[0], 'novembre 2025 (entro il 30 novembre 2026)');

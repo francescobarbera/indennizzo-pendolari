@@ -5,7 +5,7 @@ import { buildReport } from './report.mjs';
 import { MAIN_PASSES, OTHER_PASSES, browserStorage, loadPrefs, passChoice, passFromChoice, savePrefs } from './prefs.mjs';
 import { ticket } from './ticket.mjs';
 import { dataPill } from './view.mjs';
-import { STEPS, isComplete, lastStep, lineChoice, linePlain, linesForStation, offerLineList, parsePrice, priceUnit, stepError } from './wizard.mjs';
+import { STEPS, isComplete, lastStep, lineChoice, linePlain, linesForStation, offerLineList, parsePrice, pricePlaceholder, priceUnit, stepError } from './wizard.mjs';
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, text, cls) => {
@@ -230,6 +230,7 @@ function showStep() {
   $('back').hidden = step === '1';
   $('next').textContent = n === total ? 'Vedi il risultato →' : 'Avanti →';
   $('price-unit').textContent = priceUnit($('pass').value);
+  $('price').placeholder = pricePlaceholder($('pass').value);
   $('step-error').textContent = '';
 }
 

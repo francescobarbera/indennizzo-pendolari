@@ -391,3 +391,9 @@ test('a valid line immediately clears the station error on every selection path'
   assert.match(lineCards, /addEventListener\('change'.*showLine\(\)/);
   assert.match(js, /\$\('line'\)\.addEventListener\('input'.*showLine\(\)/);
 });
+
+test('the claim CTA is a full-width primary button in the result', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const css = await readFile(new URL('../site/style.css', import.meta.url), 'utf8');
+  assert.match(css, /\.cta\.cta-block\{display:flex;width:100%\}/);
+});

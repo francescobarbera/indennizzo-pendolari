@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isComplete, lastStep, lineChoice, linePlain, linesForStation, needsPrice, offerLineList, parsePrice, priceUnit, stepError } from '../site/js/wizard.mjs';
+import { isComplete, lastStep, lineChoice, linePlain, linesForStation, needsPrice, offerLineList, parsePrice, pricePlaceholder, priceUnit, stepError } from '../site/js/wizard.mjs';
 
 test('a station on one line picks it automatically', () => {
   assert.deepEqual(linesForStation('Morbegno'), ['07']);
@@ -70,4 +70,11 @@ test('the line list is offered only when the station search finds nothing', () =
 test('the price box says which period the amount is for', () => {
   assert.equal(priceUnit('mensile'), '€ al mese');
   assert.equal(priceUnit('annuale'), '€ all’anno');
+});
+
+test('the price example follows the pass type', () => {
+  assert.equal(pricePlaceholder('mensile'), 'Es. 61');
+  assert.equal(pricePlaceholder('annuale'), 'Es. 585');
+  // Integrated/excluded passes still skip the price step.
+  for (const t of ['mensile', 'annuale']) assert.equal(needsPrice(t), true);
 });

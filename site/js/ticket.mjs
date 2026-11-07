@@ -151,7 +151,9 @@ function nowSteps(items) {
 
 function claimBlock(report, ctx, body, { copy }) {
   const details = claimDetails(report, ctx);
-  const login = add(el('a'), bold('Accedi all’Area Personale Trenord'));
+  const arrow = el('span', '→', 'arrow');
+  arrow.setAttribute('aria-hidden', 'true');
+  const login = add(el('a', undefined, 'cta cta-block'), 'Accedi all’Area Personale Trenord ', arrow);
   login.href = CLAIM_URL;
   newTab(login);
   const months = add(el('ul', undefined, 'claim-months'), ...details.months.map((m) => el('li', m)));
@@ -159,8 +161,8 @@ function claimBlock(report, ctx, body, { copy }) {
   if (ctx.passType === 'annuale') need2.push('Per l’annuale Trenord suggerisce di chiedere mese per mese. ');
   if (copy) need2.push(copyButton(details.text, copy));
   body.append(nowSteps([
-    [login, 'Ti servono email e password Trenord.'],
-    [bold('Compila il modulo con il numero della tessera e questi mesi:'), need2],
+    [bold('Ti servono email e password Trenord.'), login],
+    [bold('Compila il form online con il numero della tessera e questi mesi:'), need2],
     [bold('Ricevi il voucher entro 30 giorni.')],
   ]));
 }

@@ -56,6 +56,11 @@ export function priceUnit(passType) {
   return passType === 'annuale' ? '€ all’anno' : '€ al mese';
 }
 
+// Example amount in the price box, matching the selected pass type.
+export function pricePlaceholder(passType) {
+  return passType === 'annuale' ? 'Es. 585' : 'Es. 61';
+}
+
 export function parsePrice(value) {
   const text = String(value ?? '').trim().replace(',', '.');
   return /^\d{1,5}(\.\d{1,2})?$/.test(text) ? Number(text) : NaN;
