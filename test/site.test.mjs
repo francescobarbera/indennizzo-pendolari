@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, statSync } from 'node:fs';
+import { byClass, byId, byTag, findAll, parseHtml, squash } from './dom.mjs';
 
 const PAGES = ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html'];
 const read = (p) => readFileSync(new URL(`../site/${p}`, import.meta.url), 'utf8');
@@ -23,7 +24,7 @@ test('the home page collects no email address', () => {
   assert.doesNotMatch(read('index.html'), /type="email"/);
 });
 
-test('the home page is a 3-step guided check with big back/next buttons and help always at hand', () => {
+test('the home page is a 3-step guided check with big back/next buttons', () => {
   const html = read('index.html');
   assert.match(html, /Passo 1 di 3/);
   for (const step of ['1', '1b', '2', '3']) assert.match(html, new RegExp(`class="wstep" data-step="${step}"`), step);
@@ -33,14 +34,69 @@ test('the home page is a 3-step guided check with big back/next buttons and help
   assert.match(html, /Quanto lo paghi\?/);
   assert.match(html, /id="back" class="btn btn-back"/);
   assert.match(html, /id="next" class="btn btn-next"/);
-  assert.match(html, /Hai bisogno di aiuto\? Scrivici a <a href="mailto:info@iltrenotideve.eu">/);
   const css = read('style.css');
   assert.match(css, /\.wiz \.btn[^{]*\{[^}]*min-height:56px/);
   assert.match(css, /\.wiz\{[^}]*font-size:1\.125rem/);
-  const js = read('js/app.mjs');
-  assert.match(js, /Vedi il risultato →/);
-  assert.match(js, /'Hai bisogno di aiuto\? Scrivici'/);
-  assert.match(js, /'Altri dettagli'/);
+  assert.match(read('js/app.mjs'), /Vedi il risultato →/);
+});
+
+const home = () => parseHtml(read('index.html'));
+const stepText = (doc, id) => squash(byId(doc, 'check').children.find((s) => s.getAttribute('data-step') === id).textContent);
+
+test('home: short lede, data pill placeholder, each step is just its question and its controls', () => {
+  const doc = home();
+  const hero = byClass(doc, 'hero-wiz')[0];
+  assert.equal(squash(byClass(hero, 'lede')[0].textContent), 'Scopri se Trenord ti deve un indennizzo.');
+  assert.ok(byId(doc, 'updated').attributes.has('hidden'), 'filled by JS with «Dati di [mese]»');
+  const all = squash(doc.textContent);
+  for (const gone of ['Scrivi il nome della stazione', 'Lo trovi sul biglietto', 'Guarda le città agli estremi', 'passano più linee',
+    'Scegli il tipo che usi di solito', 'Scrivi il prezzo del tuo abbonamento', 'Lo trovi sulla ricevuta', '585', 'Morbegno–Sondrio',
+    'Per un annuale, indica', 'Hai bisogno di aiuto']) {
+    assert.ok(!all.includes(gone), gone);
+  }
+  assert.equal(stepText(doc, '1b'), 'Quale linea usi?');
+  assert.equal(stepText(doc, '3'), 'Quanto lo paghi? € al mese');
+  // Help stays in the footer only.
+  const form = byId(doc, 'check');
+  assert.equal(byTag(form, 'a').filter((a) => a.getAttribute('href')?.startsWith('mailto:')).length, 0);
+  const footer = byTag(doc, 'footer')[0];
+  assert.match(squash(footer.textContent), /info@iltrenotideve\.eu/);
+  assert.match(squash(footer.textContent), /Sito indipendente · non affiliato a Trenord/);
+  assert.ok(byTag(footer, 'a').some((a) => a.getAttribute('href') === 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/'));
+});
+
+test('home: no visible duplicate labels; every control is named by its step question or a hidden label', () => {
+  const doc = home();
+  const form = byId(doc, 'check');
+  for (const label of byTag(form, 'label').filter((l) => l.getAttribute('for'))) {
+    assert.ok(label.classes.includes('visually-hidden'), `label for ${label.getAttribute('for')} is visible`);
+  }
+  assert.equal(byTag(form, 'legend').length, 0);
+  const named = (node) => {
+    const ids = node.getAttribute('aria-labelledby')?.split(' ') ?? [];
+    if (ids.length) return ids.map((id) => squash(byId(doc, id)?.textContent ?? '')).join(' ');
+    const label = findAll(form, (l) => l.tagName === 'LABEL' && l.getAttribute('for') === node.getAttribute('id'))[0];
+    if (label) return squash(label.textContent);
+    return node.parentNode?.tagName === 'LABEL' ? squash(node.parentNode.textContent) : '';
+  };
+  assert.equal(named(byId(doc, 'station')), 'Da quale stazione parti?');
+  assert.equal(named(byId(doc, 'line-cards')), 'Quale linea usi?');
+  assert.equal(named(byId(doc, 'pass-kind')), 'Che abbonamento hai?');
+  assert.equal(named(byId(doc, 'price')), 'Quanto lo paghi? € al mese');
+  for (const control of findAll(form, (n) => ['INPUT', 'SELECT'].includes(n.tagName))) {
+    assert.ok(named(control), `${control.getAttribute('id') ?? control.getAttribute('value')} has no accessible name`);
+  }
+});
+
+test('home: the line list is a hidden fallback that stays a real, labelled control', () => {
+  const doc = home();
+  const more = byId(doc, 'line-more');
+  assert.equal(more.tagName, 'DETAILS');
+  assert.ok(more.attributes.has('hidden'));
+  assert.equal(squash(byTag(more, 'summary')[0].textContent), 'Non trovi la stazione? Scegli la linea dall’elenco');
+  assert.equal(byTag(more, 'select')[0].getAttribute('id'), 'line');
+  const live = byId(doc, 'station-count');
+  assert.equal(live.getAttribute('aria-live'), 'polite');
 });
 
 test('designer v2 review: hero stacks on desktop, months stay bulleted, back hides on step 1', () => {
@@ -51,7 +107,7 @@ test('designer v2 review: hero stacks on desktop, months stay bulleted, back hid
   assert.match(css, /\.hero-wiz \.lede\{[^}]*max-width:60ch/);
   assert.match(css, /\.hero-wiz\{display:block;grid-template-columns:none\}/);
   // 2: months under «Cosa fare adesso» are a ul with discs, not a nested ol
-  assert.match(js, /el\('ul', undefined, 'claim-months'\)/);
+  assert.match(read('js/ticket.mjs'), /el\('ul', undefined, 'claim-months'\)/);
   assert.match(css, /\.claim-months\{[^}]*list-style:disc/);
   assert.match(css, /\.now-steps>li::before/);
   // 3: hero only on step 1
@@ -72,7 +128,7 @@ test('the check page stays light: no third-party scripts and small assets', () =
   const html = read('index.html');
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
   const files = ['index.html', 'style.css', 'js/app.mjs', 'js/lines.mjs', 'js/refund.mjs', 'js/stations.mjs', 'js/report.mjs',
-    'js/prefs.mjs', 'js/view.mjs'];
+    'js/prefs.mjs', 'js/view.mjs', 'js/ticket.mjs', 'js/wizard.mjs'];
   const bytes = files.reduce((n, f) => n + statSync(new URL(`../site/${f}`, import.meta.url)).size, 0);
   assert.ok(bytes < 100_000, `${bytes} bytes`);
 });
@@ -128,11 +184,9 @@ test('pass picker: Mensile and Annuale buttons, the rest under "altro"', () => {
   assert.match(html, /<input type="radio" name="pass-kind" value="mensile" checked>/);
   assert.match(html, /<input type="radio" name="pass-kind" value="annuale">/);
   assert.match(html, /<details class="more"[^>]*>\s*<summary>Altro tipo/);
-  assert.match(html, /<label for="pass">/);
-  for (const id of ['station', 'line', 'pass', 'price']) assert.match(html, new RegExp(`<label for="${id}"[ >]`), id);
 });
 
-test('the current page is marked in the navigation and the CTA keeps the official form URL', () => {
+test('the current page is marked in the navigation', () => {
   const current = { 'index.html': '"">Verifica', 'come-richiedere/index.html': 'come-richiedere/" aria-current', 'regole/index.html': 'regole/" aria-current', 'privacy/index.html': 'privacy/" aria-current' };
   for (const [page, needle] of Object.entries(current)) {
     const html = read(page);
@@ -140,32 +194,25 @@ test('the current page is marked in the navigation and the CTA keeps the officia
     if (page !== 'index.html') assert.ok(html.includes(needle), page);
   }
   assert.match(read('index.html'), /<a href="" aria-current="page"[^>]*>Verifica<\/a>/);
-  assert.match(read('js/app.mjs'), /https:\/\/www\.trenord\.it\/store\/#\/it\/auth\/login/);
-  assert.match(read('js/app.mjs'), /Accedi all’Area Personale Trenord/);
 });
 
-test('the login button is never called a form ("modulo")', () => {
-  const app = read('js/app.mjs');
-  const label = app.match(/el\('a', '([^']*)', 'cta'\)/);
-  assert.ok(label, 'CTA label found in app.mjs');
-  assert.equal(label[1].trim(), 'Accedi all’Area Personale Trenord');
+test('the login button on Come richiedere is never called a form ("modulo")', () => {
   const page = read('come-richiedere/index.html');
   const ctas = [...page.matchAll(/<a class="cta"[^>]*>([^<]*)</g)].map((m) => m[1].trim());
   assert.deepEqual(ctas, ['Accedi all’Area Personale Trenord']);
-  for (const text of [label[1], ...ctas]) assert.doesNotMatch(text, /modulo/i);
 });
 
-test('the result explains how to claim, with official times, alternatives and source', () => {
-  const app = read('js/app.mjs');
-  for (const needle of ['Cosa fare adesso', 'Ti serve: il numero della tua tessera Trenord', 'compilare il form online dedicato, selezionando la tessera e l’abbonamento',
-    'entro 30 giorni', 'trenord.it e malpensaexpress.it entro 12 mesi', 'convertirlo in denaro', '02-72494949', 'MyLink Point',
-    'rimborsi@pec.trenord.it', 'entro il giorno 5', 'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/']) {
-    assert.ok(app.includes(needle), needle);
+test('the full official how-to, times and alternatives stay on Come richiedere', () => {
+  const page = read('come-richiedere/index.html');
+  for (const needle of ['compilare il form online dedicato, selezionando la tessera e l’abbonamento', 'entro 30 giorni', 'malpensaexpress',
+    'convertir', '02-72494949', 'MyLink Point', 'rimborsi@pec.trenord.it', 'entro il giorno 5',
+    'https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/indennizzo-per-ritardi/']) {
+    assert.ok(page.includes(needle), needle);
   }
 });
 
 test('result rendering writes text, never HTML', () => {
-  for (const f of ['js/app.mjs', 'js/prefs.mjs', 'js/view.mjs']) assert.doesNotMatch(read(f), /innerHTML|outerHTML|insertAdjacentHTML/, f);
+  for (const f of ['js/app.mjs', 'js/ticket.mjs', 'js/prefs.mjs', 'js/view.mjs']) assert.doesNotMatch(read(f), /innerHTML|outerHTML|insertAdjacentHTML/, f);
 });
 
 const NEW_TAB = /target="_blank"/;
@@ -190,7 +237,7 @@ test('external links open in a new tab with noopener noreferrer, internal links 
 });
 
 test('links built in JS: external ones go through newTab, internal ones do not', () => {
-  const js = read('js/app.mjs');
+  const js = read('js/ticket.mjs');
   const helper = js.match(/function newTab\(a\) \{[^}]*\}/)?.[0] ?? '';
   assert.match(helper, /a\.target = '_blank'/);
   assert.match(helper, /a\.rel = 'noopener noreferrer'/);
@@ -245,20 +292,6 @@ test('sources: ART 106/2018 on the ART site, DGR XII/2116 for the 30%, Regione v
   assert.match(html, /Regione Lombardia indica 12 mesi dalla fine di validità anche per l’annuale\. Qui seguiamo la regola di Trenord perché è più restrittiva\./);
 });
 
-test('the total is an upper bound conditional on a pass in each month, and the refund is a voucher', () => {
-  const js = read('js/app.mjs');
-  assert.doesNotMatch(js, /Ti spettano circa/);
-  assert.match(js, /'Fino a circa'/);
-  assert.match(js, /Ti spetta se avevi un abbonamento valido per questa linea in ciascuno di questi mesi/);
-  assert.match(js, /Arriva come voucher Trenord \(un buono\), non in denaro/);
-});
-
-test('below 4 € the verdict is never yes', () => {
-  const js = read('js/app.mjs');
-  assert.match(js, /Sotto i 4 €: niente indennizzo/);
-  assert.match(js, /const yes = report\.claimable > 0/);
-});
-
 const PAGE_URLS = { 'index.html': '', 'come-richiedere/index.html': 'come-richiedere/', 'regole/index.html': 'regole/', 'privacy/index.html': 'privacy/' };
 
 test('every page has its canonical URL on iltrenotideve.eu, Open Graph and Twitter card', () => {
@@ -292,10 +325,6 @@ test('preview image is 1200×630, icons, robots.txt and sitemap.xml exist', () =
   for (const path of Object.values(PAGE_URLS)) assert.match(sitemap, new RegExp(`<loc>https://iltrenotideve\\.eu/${path}</loc>`));
 });
 
-test('the home page says the refund is a voucher', () => {
-  assert.match(read('index.html'), /voucher/);
-});
-
 
 test('every page links the contact address and says it is not a Trenord channel', () => {
   for (const page of ['index.html', 'come-richiedere/index.html', 'regole/index.html', 'privacy/index.html']) {
@@ -311,15 +340,14 @@ test('every page links the contact address and says it is not a Trenord channel'
 
 test('PEC and post need the Trenord form and an ID copy, with the postal address', () => {
   const form = 'M_1006-_rev.4_Modulo_Reclami_e_Rimborsi.pdf';
-  for (const text of [read('js/app.mjs'), read('come-richiedere/index.html')]) {
-    assert.ok(text.includes(form));
-    assert.ok(text.includes('allegando copia del documento d’identità'));
-    assert.ok(text.includes('Piazzale Cadorna 14 – 20121 Milano'));
-  }
+  const text = read('come-richiedere/index.html');
+  assert.ok(text.includes(form));
+  assert.ok(text.includes('allegando copia del documento d’identità'));
+  assert.ok(text.includes('Piazzale Cadorna 14 – 20121 Milano'));
 });
 
 test('claim copy never states mechanics Trenord does not describe', () => {
-  for (const text of [read('js/app.mjs'), read('js/report.mjs'), read('come-richiedere/index.html')]) {
+  for (const text of [read('js/app.mjs'), read('js/ticket.mjs'), read('js/report.mjs'), read('come-richiedere/index.html')]) {
     assert.doesNotMatch(text, /Ripeti|per ogni mese|Mesi da indicare|mesi da indicare/);
   }
   assert.match(read('come-richiedere/index.html'), /Per l’annuale Trenord suggerisce di chiedere mese per mese/);
@@ -334,10 +362,7 @@ test('static deadline copy gives annual IVOL and TrenoCittà the publication rul
   }
 });
 
-test('IVOL yes is conditioned on the day-5 declaration and links the official form', () => {
-  const app = read('js/app.mjs');
-  assert.match(app, /Sì, se l’IVOL è di Trenord o hai dichiarato la direttrice/);
-  assert.ok(app.includes('https://www.trenord.it/assistenza/servizi/rimborsi-e-indennizzi/dichiarazione-utilizzo-abbonamento-integrato/'));
+test('Come richiedere links the IVOL day-5 declaration form (the result is covered in ticket.test.mjs)', () => {
   assert.ok(read('come-richiedere/index.html').includes('dichiarazione-utilizzo-abbonamento-integrato/'));
 });
 
@@ -365,4 +390,10 @@ test('a valid line immediately clears the station error on every selection path'
   const lineCards = js.split('function lineCards(')[1].split('\n}')[0];
   assert.match(lineCards, /addEventListener\('change'.*showLine\(\)/);
   assert.match(js, /\$\('line'\)\.addEventListener\('input'.*showLine\(\)/);
+});
+
+test('the claim CTA is a full-width primary button in the result', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const css = await readFile(new URL('../site/style.css', import.meta.url), 'utf8');
+  assert.match(css, /\.cta\.cta-block\{display:flex;width:100%\}/);
 });

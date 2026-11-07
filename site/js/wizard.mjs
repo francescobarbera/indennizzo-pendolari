@@ -1,7 +1,7 @@
 // Pure helpers for the 3-step guided check (no DOM), testable in node.
 import { LINES } from './lines.mjs';
 import { PASS_TYPES } from './refund.mjs';
-import { STATIONS, normalize } from './stations.mjs';
+import { STATIONS, normalize, searchStations } from './stations.mjs';
 
 export const STEPS = 3;
 
@@ -18,6 +18,14 @@ export function lineChoice(codes) {
   if (codes.length === 1) return { auto: codes[0] };
   if (codes.length > 1) return { choose: codes };
   return { none: true };
+}
+
+// The line list is a fallback: shown only when the station search finds nothing (an empty search counts once
+// the user tries to go on), or when the line was already picked from it.
+export function offerLineList({ station = '', line = '', submitted = false }) {
+  const codes = linesForStation(station);
+  if (line) return !codes.includes(line);
+  return !codes.length && !searchStations(station).length && (submitted || normalize(station).length >= 2);
 }
 
 // Line names in plain words: "Tirano – Sondrio – Lecco – Milano"; cards show ends and the towns between.
@@ -41,6 +49,16 @@ export function needsPrice(passType) {
 
 export function lastStep(passType) {
   return needsPrice(passType) ? 3 : 2;
+}
+
+// Shown next to the price box so the user types the amount for the right period.
+export function priceUnit(passType) {
+  return passType === 'annuale' ? '€ all’anno' : '€ al mese';
+}
+
+// Example amount in the price box, matching the selected pass type.
+export function pricePlaceholder(passType) {
+  return passType === 'annuale' ? 'Es. 585' : 'Es. 61';
 }
 
 export function parsePrice(value) {

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { buildReport } from '../site/js/report.mjs';
 import { PASS_TYPES } from '../site/js/refund.mjs';
-import { PASS_SHORT, barWidth, deadlineInfo, monthParts, percent, tileState, worstMonth } from '../site/js/view.mjs';
+import { PASS_SHORT, barWidth, dataPill, deadlineInfo, monthParts, percent, tileState, worstMonth } from '../site/js/view.mjs';
 
 const data = JSON.parse(readFileSync(new URL('./fixtures/indennizzi-2026-11.json', import.meta.url), 'utf8'));
 const today = new Date('2026-11-05T10:00:00Z');
@@ -49,6 +49,12 @@ test('no countdown for excluded passes or lines with nothing claimable', () => {
   assert.equal(deadlineInfo(buildReport({ data, lineCode: '07', passType: 'settimanale', price: 20, today }), today), null);
   const none = { pass: PASS_TYPES.mensile, rows: [{ qualifies: true, expired: true, deadline: '2025-01' }] };
   assert.equal(deadlineInfo(none, today), null);
+});
+
+test('the data pill names the month of the latest official list', () => {
+  assert.equal(dataPill(data), 'Dati di agosto 2026');
+  assert.equal(dataPill({ months: [] }), null);
+  assert.equal(dataPill(null), null);
 });
 
 test('month tiles: states, bars and labels', () => {
