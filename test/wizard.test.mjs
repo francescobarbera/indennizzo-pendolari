@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isComplete, lastStep, lineChoice, linePlain, linesForStation, needsPrice, parsePrice, stepError } from '../site/js/wizard.mjs';
+import { isComplete, lastStep, lineChoice, linePlain, linesForStation, needsPrice, offerLineList, parsePrice, priceUnit, stepError } from '../site/js/wizard.mjs';
 
 test('a station on one line picks it automatically', () => {
   assert.deepEqual(linesForStation('Morbegno'), ['07']);
@@ -49,4 +49,25 @@ test('saved answers show the result straight away only when complete', () => {
   assert.equal(isComplete({ line: '07', passType: 'mensile', price: '61' }), true);
   assert.equal(isComplete({ line: '07', passType: 'mensile', price: '' }), false);
   assert.equal(isComplete({ line: '', passType: 'ivol', price: '' }), true);
+});
+
+test('the line list is offered only when the station search finds nothing', () => {
+  assert.equal(offerLineList({ station: '' }), false);
+  assert.equal(offerLineList({ station: 'Mo' }), false, 'suggestions to pick from');
+  assert.equal(offerLineList({ station: 'Morbeg' }), false, 'partial name with matches');
+  assert.equal(offerLineList({ station: 'Morbegno', line: '07' }), false);
+  assert.equal(offerLineList({ station: 'Atlantide' }), true);
+  assert.equal(offerLineList({ station: 'x' }), false, 'one letter is not a search yet');
+  // Going on with an empty or one-letter box is a search with no results.
+  assert.equal(offerLineList({ station: '', submitted: true }), true);
+  assert.equal(offerLineList({ station: 'x', submitted: true }), true);
+  assert.equal(offerLineList({ station: 'Morbeg', submitted: true }), false);
+  // A line already picked from the list keeps the list visible so it can be changed.
+  assert.equal(offerLineList({ station: '', line: '07' }), true);
+  assert.equal(offerLineList({ station: 'Lecco', line: linesForStation('Lecco')[0] }), false);
+});
+
+test('the price box says which period the amount is for', () => {
+  assert.equal(priceUnit('mensile'), '€ al mese');
+  assert.equal(priceUnit('annuale'), '€ all’anno');
 });

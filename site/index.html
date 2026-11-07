@@ -34,9 +34,9 @@
 </div></header>
 <main class="wiz-main">
 <section class="hero hero-wiz">
-<p id="updated" class="eyebrow" hidden>Dati aggiornati</p>
+<p id="updated" class="eyebrow" hidden>Dati</p>
 <h1>Il treno ti deve <em>dei soldi?</em></h1>
-<p class="lede">Rispondi a 3 domande: ti diciamo se Trenord ti deve un indennizzo per i ritardi, circa quanto (in voucher) e entro quando chiederlo.</p>
+<p class="lede">Scopri se Trenord ti deve un indennizzo.</p>
 </section>
 <p id="wizard-loading" role="status">Caricamento della verifica… Se non parte, puoi consultare le <a href="regole/">regole</a> e <a href="come-richiedere/">come richiedere l’indennizzo</a>.</p>
 <noscript><p>Per la verifica guidata serve JavaScript. Le regole e la guida restano disponibili dai link qui sopra.</p></noscript>
@@ -47,56 +47,44 @@
   </div>
   <section class="wstep" data-step="1" aria-labelledby="q1">
     <h2 id="q1" class="q" tabindex="-1">Da quale stazione parti?</h2>
-    <p class="wlede">Scrivi il nome della stazione da cui prendi il treno ogni giorno.</p>
-    <p class="tip">Lo trovi sul biglietto o nell’app Trenord. Esempio: Morbegno.</p>
-    <label for="station" class="visually-hidden">Stazione</label>
     <div class="search-wrap">
       <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="#5E4D6B" stroke-width="2.5"/><path d="M20 20l-4-4" stroke="#5E4D6B" stroke-width="2.5" stroke-linecap="round"/></svg>
-      <input id="station" type="search" placeholder="Es. Morbegno" aria-controls="station-results">
+      <input id="station" type="search" placeholder="Es. Morbegno" aria-labelledby="q1" aria-controls="station-results">
     </div>
     <ul id="station-results" class="suggestions" hidden></ul>
     <p id="station-count" class="visually-hidden" aria-live="polite"></p>
     <div id="auto-line" class="auto-line" role="status" hidden><p class="k">La tua linea:</p><p class="v" id="auto-line-name"></p></div>
-    <details class="more" id="line-more">
+    <details class="more" id="line-more" hidden>
       <summary>Non trovi la stazione? Scegli la linea dall’elenco</summary>
-      <label for="line">Linea (direttrice)</label>
+      <label for="line" class="visually-hidden">Linea (direttrice)</label>
       <select id="line"><option value="">Scegli la linea</option></select>
     </details>
   </section>
   <section class="wstep" data-step="1b" aria-labelledby="q1b" hidden>
     <h2 id="q1b" class="q" tabindex="-1">Quale linea usi?</h2>
-    <p class="wlede" id="hub-lede">Da questa stazione passano più linee. Tocca quella che prendi di solito.</p>
-    <p class="tip">Guarda le città agli estremi del percorso.</p>
-    <fieldset class="cards" id="line-cards"><legend class="visually-hidden">Linea</legend></fieldset>
+    <fieldset class="cards" id="line-cards" aria-labelledby="q1b"></fieldset>
   </section>
   <section class="wstep" data-step="2" aria-labelledby="q2" hidden>
     <h2 id="q2" class="q" tabindex="-1">Che abbonamento hai?</h2>
-    <p class="wlede">Scegli il tipo che usi di solito per questa linea.</p>
-    <fieldset class="cards" id="pass-kind">
-      <legend class="visually-hidden">Abbonamento</legend>
+    <fieldset class="cards" id="pass-kind" aria-labelledby="q2">
       <label class="card-opt"><input type="radio" name="pass-kind" value="mensile" checked><span class="t">Mensile</span><span class="s">Lo rinnovi ogni mese</span></label>
       <label class="card-opt"><input type="radio" name="pass-kind" value="annuale"><span class="t">Annuale</span><span class="s">Vale per tutto l’anno</span></label>
     </fieldset>
     <details class="more" id="pass-more">
       <summary>Altro tipo (integrato, IVOL, settimanale…)</summary>
-      <label for="pass">Tipo di abbonamento</label>
+      <label for="pass" class="visually-hidden">Tipo di abbonamento</label>
       <select id="pass"></select>
     </details>
   </section>
   <section class="wstep" data-step="3" aria-labelledby="q3" hidden>
     <h2 id="q3" class="q" tabindex="-1">Quanto lo paghi?</h2>
-    <p class="wlede" id="price-lede">Scrivi il prezzo del tuo abbonamento, in euro.</p>
-    <p class="tip" id="price-hint">Lo trovi sulla ricevuta o nell’app. Esempio: Morbegno–Sondrio, 2ª classe, mensile 61 €, annuale 585 €.</p>
-    <label for="price">Prezzo in euro</label>
-    <div class="money"><span aria-hidden="true">€</span><input id="price" type="text" inputmode="decimal" placeholder="Es. 61" aria-describedby="price-hint price-tiny"></div>
-    <p class="tiny" id="price-tiny">Per un annuale, indica quanto paghi all’anno.</p>
+    <div class="money"><input id="price" type="text" inputmode="decimal" placeholder="Es. 61" aria-labelledby="q3 price-unit"><span id="price-unit" class="unit">€ al mese</span></div>
   </section>
   <p id="step-error" class="step-error" role="alert"></p>
   <div class="nav-row">
     <button type="button" id="back" class="btn btn-back" disabled>← Indietro</button>
     <button type="submit" id="next" class="btn btn-next">Avanti →</button>
   </div>
-  <p class="help-line">Hai bisogno di aiuto? Scrivici a <a href="mailto:info@iltrenotideve.eu">info@iltrenotideve.eu</a></p>
 </form>
 <div id="result-wrap" hidden>
   <button type="button" id="edit" class="btn btn-back btn-edit">← Cambia le risposte</button>

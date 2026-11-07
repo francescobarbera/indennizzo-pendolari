@@ -1,4 +1,6 @@
 // Pure helpers for the result ticket (no DOM), testable in node.
+import { monthLabel } from './report.mjs';
+
 export const PASS_SHORT = {
   mensile: 'Mensile', annuale: 'Annuale', trenocitta: 'TrenoCittà', ivol: 'IVOL',
   settimanale: 'Settimanale', stibm: 'STIBM', ivop: 'IVOP', gratuito: 'Gratuito',
@@ -10,6 +12,12 @@ const DAY = 86_400_000;
 export function monthParts(month) {
   const [y, m] = month.split('-').map(Number);
   return { abbr: MONTH_ABBR[m - 1], year: String(y) };
+}
+
+// The pill above the title: the month of the latest official list; null without data.
+export function dataPill(data) {
+  const last = data?.months?.at(-1)?.month;
+  return last ? `Dati di ${monthLabel(last)}` : null;
 }
 
 export function percent(index, digits = 2) {
